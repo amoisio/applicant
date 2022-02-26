@@ -1,0 +1,23 @@
+{
+  "template": {
+    "questions" :[
+      "How big is the team currently? How many developers are there?",
+      "Which agile framework do you employ for software development? Do you have a scrum master?",
+      "What kind of dependencies does the team have? As in, does the team fully own the developed product or is part of a larger product?"
+    ]
+  },
+  "entries": [{
+    "title": "Employer 1",
+    "started": "2022-02-27T10:00:00",
+    "finished": null,
+    "answers": [
+      {
+        "question": "How big is the team currently? How many developers are there?",
+        "answer": null
+      }, {
+        "question": "Which agile framework do you employ for software development? Do you have a scrum master?",
+        "answer": null
+      }
+    ] 
+  }]
+}
