@@ -1,0 +1,9 @@
+version: "3.7"
+
+services:
+  applicant:
+    container_name: applicant
+    image: moisale/applicant:latest
+    ports:
+      - 80:80
+    
