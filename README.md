@@ -70,3 +70,49 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 =======
 # applicant
+
+
+
+Applicant
+- Header
+  - Title
+  
+- Navigation (showNavigation)
+  - Button ("Continue" id: 1) @continue(id)
+  - Button ("Continue" id: 2) @continue(id)
+    ...
+  - Button ("New",) @new
+  - Button ("Edit Template") @edit-template
+  - Button ("Archive") @show-archive
+- Questionnaire (showQuestionnaire : [id])
+- TemplateEditor (showEditor)
+- Archive
+  - Button ("Show <name>" id:nnn) @continue(id)
+    ...  
+
+- Footer
+  - Button(Archive)
+  - Button(Edit Template)
+
+// App
+
+// Navigation
+// - Title
+// - Continue button (for opening the filling page for an "in progress" filling)
+// - New button (for opening the start new filling page)
+// - Template (for opening the edit temlate page)
+// - Archive (for opening the archive page which shows all previous fillings)
+
+// TemplateEditor
+// - Title
+// - Add new question button
+// - QuestionEditor *
+
+// Questionnaire
+// - Title
+// - AnswerEditor *
+// - Complete button
+
+// Archive
+// - Filled Questionnaire
+
