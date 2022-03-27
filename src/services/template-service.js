@@ -36,8 +36,6 @@ function setQuestions(questionsArray) {
     ls(key, []);
     return;
   }
-  
-
   ls(key, questionsArray);
 }
 

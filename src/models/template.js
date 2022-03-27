@@ -1,7 +1,6 @@
 import { v4 as uuid } from 'uuid';
 import Question from './question';
 
-
 export default class Template {
   constructor() {
     this.id = uuid();
