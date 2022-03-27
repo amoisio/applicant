@@ -3,7 +3,7 @@ import Question from '../components/template-editor/Question';
 
 const key = 'applicant.template'; 
 
-// Made a change
+
 function getQuestions() {
   const qs = ls(key);
   if (qs === undefined || qs === null) {
@@ -19,7 +19,6 @@ function getQuestions() {
   }
 }
 
-// Made another change
 function addQuestion(questionText) {
   if (typeof(questionText) !== "string") {
     throw new Error("questionText must be a string.");
