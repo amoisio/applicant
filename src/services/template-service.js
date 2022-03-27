@@ -19,6 +19,7 @@ function getQuestions() {
   }
 }
 
+// Made another change
 function addQuestion(questionText) {
   if (typeof(questionText) !== "string") {
     throw new Error("questionText must be a string.");
