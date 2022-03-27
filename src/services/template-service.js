@@ -3,6 +3,7 @@ import Question from '../components/template-editor/Question';
 
 const key = 'applicant.template'; 
 
+// Made a change
 function getQuestions() {
   const qs = ls(key);
   if (qs === undefined || qs === null) {
