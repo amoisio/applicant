@@ -1,9 +1,9 @@
-import Title from './Title';
+import ApplicationTitle from './ApplicationTitle';
 
 export default function Header(props) {
   return (
     <header>
-      <Title>{props.children}</Title>
+      <ApplicationTitle>{props.children}</ApplicationTitle>
     </header>
   );
 }

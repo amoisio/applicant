@@ -7,6 +7,7 @@ import Footer from './shared/Footer';
 import Header from './shared/Header';
 import Archive from './archive/Archive';
 
+
 export default class Applicant extends React.Component {
   constructor(props) {
     super(props);
