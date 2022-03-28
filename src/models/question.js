@@ -1,15 +1,26 @@
-import { v4 as uuid } from 'uuid';
-
-export default class Question {
-  constructor(question) {
-    if (question instanceof Question) {
-      this.id = question.id;
-      this.text = question.text;
-    } else if (question instanceof string) {
-      this.id = uuid();
-      this.text = question;
-    } else {
-      throw new Error("Question constructor parameter must be of type Question or string.");
-    }
-  }
+/**
+ * Creates a new immutable question.
+ * @param {string} id Question id.
+ * @param {string} text Question text.
+ * @returns An immutable question.
+ */
+function factory(id, text) {
+  return { id, text };
 }
+
+/**
+ * Returns a new immutable question structure with an updated question.
+ * @param {object} question Question structure.
+ * @param {string} text New question text.
+ * @returns An immutable question with the question text.
+ */
+function changeText(text, question) {
+  return factory(question.id, text);
+}
+
+const question = {
+  create: factory,
+  changeText: changeText,
+};
+
+export default question;
