@@ -31,7 +31,11 @@ function create(questions, id) {
  * @returns A copy of the template with the added question.
  */
 function addQuestion(text, template) {
-  const updatedQuestions = [...template.questions, TemplateQuestion.create(text)];
+  const trimmedText = trimmedOrDefault(text);
+  if (!trimmedText) {
+    throw new Error('Question text must be given.');
+  }
+  const updatedQuestions = [...template.questions, TemplateQuestion.create(trimmedText)];
   return create(updatedQuestions, template.id);
 }
 
@@ -43,12 +47,9 @@ function addQuestion(text, template) {
  */
 function removeQuestion(id, template) {
   const updatedQuestions = [...template.questions];
-  const index = updatedQuestions.findIndex((q) => q.id ===  id);
+  const index = updatedQuestions.findIndex((q) => q.id === id);
   if (index === -1) {
-    console.error(
-      `Unable to find question ${id} for removal. No action taken.`
-    );
-    return template;
+    throw new Error(`Unable to find question ${id}.`);
   }
   updatedQuestions.splice(index, 1);
   return create(updatedQuestions, template.id);
@@ -62,13 +63,14 @@ function removeQuestion(id, template) {
  * @returns A copy of the template in which the question is in the new location.
  */
 function reorderQuestion(id, newIndex, template) {
+  if (newIndex === null || newIndex === undefined) {
+    throw new Error('New index must be given.');
+  }
+
   const updatedQuestions = [...template.questions];
   const currentIndex = updatedQuestions.findIndex(q => q.id === id);
   if (currentIndex === -1) {
-    console.error(
-      `Unable to find question ${id} for reordering. No action taken.`
-    );
-    return template;
+    throw new Error(`Unable to find question ${id}.`);
   }
   if (newIndex === currentIndex) {
     return template;
@@ -95,10 +97,7 @@ function changeQuestionText(id, text, template) {
   const updatedQuestions = [...template.questions];
   const index = updatedQuestions.findIndex(q => q.id === id);
   if (index === -1) {
-    console.error(
-      `Unable to find question ${question.text} to update. No action taken.`
-    );
-    return template;
+    throw new Error(`Unable to find question ${id}.`);
   }
   updatedQuestions[index] = TemplateQuestion.changeText(
     text,

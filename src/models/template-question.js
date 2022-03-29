@@ -9,11 +9,11 @@ import { trimmedOrDefault } from './common'
  */
 function create(text, id) {
   const trimmedText = trimmedOrDefault(text);
-  if (!trimmedOrDefault) {
-    throw new Error('Question text must be given.');
-  }
   const trimmedId = trimmedOrDefault(id);
-  return { id: trimmedId ?? uuid(), text: trimmedText };
+  return { 
+    id: trimmedId ?? uuid(), 
+    text: trimmedText 
+  };
 }
 
 /**
