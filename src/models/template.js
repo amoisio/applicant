@@ -1,111 +1,118 @@
-import Question from './question';
+import { v4 as uuid } from 'uuid';
+import { trimmedOrDefault } from './common';
+import TemplateQuestion from './template-question';
 
 /**
- * Creates a new template.
- * @param {string} id
- * @param {Array} questions
+ * Create a template.
+ * @param {any[]|any} questions Template questions to include in the template.
+ * @param {string} id Template id. A UUID value will be auto generated if id is not provided.
  * @returns
  */
-function factory(id, questions) {
-  let qs;
+function create(questions, id) {
+  let arr = [];
   if (Array.isArray(questions)) {
-    qs = questions.map((q) => Question.create(q.id, q.text));
+    arr = questions.map(q => TemplateQuestion.create(q.text, q.id));
   } else if (typeof questions === 'object') {
-    qs = [Question.create(questions.id, questions.text)];
+    arr = [TemplateQuestion.create(questions.text, questions.id)];
   } else {
-    qs = [];
+    arr = [];
   }
+  const trimmedId = trimmedOrDefault(id);
   return {
-    id,
-    questions: qs,
+    id: trimmedId ?? uuid(),
+    questions: arr,
   };
 }
 
 /**
  * Add a question to the template.
- * @param {object} question Question to add.
+ * @param {string} text Question text.
  * @param {object} template Template to which the question is added.
  * @returns A copy of the template with the added question.
  */
-function addQuestion(question, template) {
-  const updatedQuestions = [...template.questions, question];
-  return factory(template.id, updatedQuestions);
+function addQuestion(text, template) {
+  const updatedQuestions = [...template.questions, TemplateQuestion.create(text)];
+  return create(updatedQuestions, template.id);
 }
 
 /**
  * Remove a question from the template.
- * @param {object} question Question to remove.
+ * @param {string} id Id of the question to remove.
  * @param {object} template Template from which the question is removed.
  * @returns A copy of the template without the removed question.
  */
-function removeQuestion(question, template) {
+function removeQuestion(id, template) {
   const updatedQuestions = [...template.questions];
-  const index = updatedQuestions.findIndex(q => q.id === question.id);
+  const index = updatedQuestions.findIndex((q) => q.id ===  id);
   if (index === -1) {
     console.error(
-      `Unable to find question ${question.text} for removal. No action taken.`
+      `Unable to find question ${id} for removal. No action taken.`
     );
     return template;
   }
   updatedQuestions.splice(index, 1);
-  return factory(template.id, updatedQuestions);
+  return create(updatedQuestions, template.id);
 }
 
 /**
  * Move a question to different location within the template.
- * @param {object} question Question to move.
+ * @param {string} id Id of the question to move.
  * @param {number} newIndex New index of the question. Value 0/-1 or any index >= size of the array places the question at the top/end of the list of questions, respectively.
  * @param {object} template Template in which the question is moved
  * @returns A copy of the template in which the question is in the new location.
  */
-function reorderQuestion(question, newIndex, template) {
+function reorderQuestion(id, newIndex, template) {
   const updatedQuestions = [...template.questions];
-  const currentIndex = updatedQuestions.findIndex(q => q.id === question.id);
+  const currentIndex = updatedQuestions.findIndex(q => q.id === id);
   if (currentIndex === -1) {
     console.error(
-      `Unable to find question ${question.text} for reordering. No action taken.`
+      `Unable to find question ${id} for reordering. No action taken.`
     );
     return template;
   }
   if (newIndex === currentIndex) {
     return template;
   }
-  updatedQuestions.splice(currentIndex, 1);
+  const currentQuestion = updatedQuestions.splice(currentIndex, 1)[0];
   if (newIndex === 0) {
-    updatedQuestions.splice(0, 0, question); 
+    updatedQuestions.splice(0, 0, currentQuestion);
   } else if (newIndex === -1 || newIndex >= updatedQuestions.length) {
-    updatedQuestions.push(question);
+    updatedQuestions.push(currentQuestion);
   } else {
-    updatedQuestions.splice(newIndex, 0, question);
+    updatedQuestions.splice(newIndex, 0, currentQuestion);
   }
-  return factory(template.id, updatedQuestions);
+  return create(updatedQuestions, template.id);
 }
 
 /**
  * Change a question's text.
- * @param {object} question Question with the updated text.
+ * @param {string} id Id of the question with the updated text.
+ * @param {string} text Updated question text.
  * @param {object} template Template in which the question text will be changed.
  * @returns A copy of the template in which the question text is changed.
  */
-function changeQuestionText(question, template) {
+function changeQuestionText(id, text, template) {
   const updatedQuestions = [...template.questions];
-  const index = updatedQuestions.findIndex(q => q.id === question.id);
+  const index = updatedQuestions.findIndex(q => q.id === id);
   if (index === -1) {
     console.error(
       `Unable to find question ${question.text} to update. No action taken.`
     );
     return template;
   }
-  updatedQuestions[index] = Question.changeText(question.text, updatedQuestions[index]);
-  return factory(template.id, updatedQuestions);
+  updatedQuestions[index] = TemplateQuestion.changeText(
+    text,
+    updatedQuestions[index]
+  );
+  return create(updatedQuestions, template.id);
 }
 
-const template = {
-  create: factory,
+const api = {
+  create: create,
   addQuestion: addQuestion,
   changeQuestionText: changeQuestionText,
   removeQuestion: removeQuestion,
-  reorderQuestion: reorderQuestion
+  reorderQuestion: reorderQuestion,
 };
 
-export default template;
+export default api;

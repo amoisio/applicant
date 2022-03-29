@@ -1,26 +1,44 @@
+import { v4 as uuid } from 'uuid';
+import { trimmedOrDefault } from './common';
+
 /**
- * Creates a new immutable question.
- * @param {string} id Question id.
+ * Create a question.
  * @param {string} text Question text.
+ * @param {string} id Question id.
+ * @param {string} answer Answer text.
  * @returns An immutable question.
  */
-function factory(id, text) {
-  return { id, text };
+function create(text, id, answer) {
+  const trimmedText = trimmedOrDefault(text);
+  if (!trimmedText) {
+    throw new Error('Question text must be given.');
+  }
+  const trimmedId = trimmedOrDefault(id);
+  const trimmedAnswer = trimmedOrDefault(answer);
+  return {
+    id: trimmedId ?? uuid(),
+    text: trimmedText,
+    answer: trimmedAnswer,
+    isAnswered: !!trimmedAnswer,
+  };
 }
 
 /**
  * Returns a new immutable question structure with an updated question.
+ * @param {string} answer Answer text.
  * @param {object} question Question structure.
- * @param {string} text New question text.
- * @returns An immutable question with the question text.
+ * @returns An immutable question with the answer text.
  */
-function changeText(text, question) {
-  return factory(question.id, text);
+function answer(answer, question) {
+  if (!question) {
+    throw new Error('Question object must be given.');
+  }
+  return create(question.text, question.id, answer);
 }
 
-const question = {
-  create: factory,
-  changeText: changeText,
+const api = {
+  create: create,
+  answer: answer,
 };
 
-export default question;
+export default api;
