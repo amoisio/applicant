@@ -1,15 +1,22 @@
 import Template from './template';
 import Question from './question';
 
-describe('Template', () => {
-  it('should construct with no questions', () => {
+describe('Template.create', () => {
+  it('should construct template correctly without providing a question array', () => {
+    const template = Template.create('my-id');
+
+    expect(template.id).toBe('my-id');
+    expect(template.questions.length).toBe(0);
+  });
+
+  it('should construct template correctly when provided with an empty question array', () => {
     const template = Template.create('my-id', []);
 
     expect(template.id).toBe('my-id');
     expect(template.questions.length).toBe(0);
   });
 
-  it('should construct with one question', () => {
+  it('should construct template correctly with a single question', () => {
     const question1 = Question.create('1', 'q');
 
     const template = Template.create('my-id', question1);
@@ -19,7 +26,7 @@ describe('Template', () => {
     expect(template.questions).toContainEqual(question1);
   });
 
-  it('should construct with multiple questions', () => {
+  it('should construct template correctly with multiple questions', () => {
     const question1 = Question.create('1', 'q');
     const question2 = Question.create('2', 'dd');
 
@@ -30,20 +37,34 @@ describe('Template', () => {
     expect(template.questions).toContainEqual(question1);
     expect(template.questions).toContainEqual(question2);
   });
+});
 
-  it('should return a new template with the added question', () => {
+describe('Template.addQuestion', () => {
+  it('should add a question to a copy of a template', () => {
     const question1 = Question.create('1', 'q');
     const template = Template.create('my-q', question1);
-
     const question2 = Question.create('2', 'dd');
+
     const updatedTemplate = Template.addQuestion(question2, template);
 
-    expect(template.questions.length).toBe(1);
     expect(updatedTemplate.questions.length).toBe(2);
     expect(updatedTemplate.questions).toContainEqual(question2);
   });
 
-  it('should return a new template without the removed question', () => {
+  it('should not add the question to the provided template', () => {
+    const question1 = Question.create('1', 'q');
+    const template = Template.create('my-q', question1);
+    const question2 = Question.create('2', 'dd');
+
+    Template.addQuestion(question2, template);
+
+    expect(template.questions.length).toBe(1);
+    expect(template.questions).not.toContainEqual(question2);
+  });
+});
+
+describe('Template.removeQuestion', () => {
+  it('should remove a question from a copy of a template', () => {
     const question1 = Question.create('1', 'q');
     const question2 = Question.create('2', 'dd');
     const template = Template.create('my-q', [question1, question2]);
@@ -52,8 +73,116 @@ describe('Template', () => {
 
     expect(updatedTemplate.questions.length).toBe(1);
     expect(updatedTemplate.questions).toContainEqual(question1);
+    expect(updatedTemplate.questions).not.toContainEqual(question2);
+  });
+
+  it('should not remove the question from the provided template', () => {
+    const question1 = Question.create('1', 'q');
+    const question2 = Question.create('2', 'dd');
+    const template = Template.create('my-q', [question1, question2]);
+
+    Template.removeQuestion(question2, template);
+
     expect(template.questions.length).toBe(2);
     expect(template.questions).toContainEqual(question1);
+    expect(template.questions).toContainEqual(question2);
+  });
+});
+
+describe('Template.reorderQuestion', () => {
+  it('should reorder the questions of a copied template', () => {
+    const question1 = Question.create('1', 'first');
+    const question2 = Question.create('2', 'second');
+    const question3 = Question.create('3', 'third');
+    const template = Template.create('my-q', [question1, question2, question3]);
+
+    const updatedTemplate = Template.reorderQuestion(question3, 1, template);
+
+    expect(updatedTemplate.questions.length).toBe(3);
+    expect(updatedTemplate.questions[0]).toEqual(question1);
+    expect(updatedTemplate.questions[1]).toEqual(question3);
+    expect(updatedTemplate.questions[2]).toEqual(question2);
+  });
+
+  it('should place the question at the start of the question list when called with index 0', () => {
+    const question1 = Question.create('1', 'first');
+    const question2 = Question.create('2', 'second');
+    const question3 = Question.create('3', 'third');
+    const template = Template.create('my-q', [question1, question2, question3]);
+
+    const updatedTemplate = Template.reorderQuestion(question3, 0, template);
+
+    expect(updatedTemplate.questions.length).toBe(3);
+    expect(updatedTemplate.questions[0]).toEqual(question3);
+    expect(updatedTemplate.questions[1]).toEqual(question1);
+    expect(updatedTemplate.questions[2]).toEqual(question2);
+  });
+
+  it('should place the question at the end of the question list when called with index -1', () => {
+    const question1 = Question.create('1', 'first');
+    const question2 = Question.create('2', 'second');
+    const question3 = Question.create('3', 'third');
+    const template = Template.create('my-q', [question1, question2, question3]);
+
+    const updatedTemplate = Template.reorderQuestion(question1, -1, template);
+
+    expect(updatedTemplate.questions.length).toBe(3);
+    expect(updatedTemplate.questions[0]).toEqual(question2);
+    expect(updatedTemplate.questions[1]).toEqual(question3);
+    expect(updatedTemplate.questions[2]).toEqual(question1);
+  });
+
+  it('should place the question at the end of the question list when called with index greater than the size of the list', () => {
+    const question1 = Question.create('1', 'first');
+    const question2 = Question.create('2', 'second');
+    const question3 = Question.create('3', 'third');
+    const template = Template.create('my-q', [question1, question2, question3]);
+
+    const updatedTemplate = Template.reorderQuestion(question1, 9000, template);
+
+    expect(updatedTemplate.questions.length).toBe(3);
+    expect(updatedTemplate.questions[0]).toEqual(question2);
+    expect(updatedTemplate.questions[1]).toEqual(question3);
+    expect(updatedTemplate.questions[2]).toEqual(question1);
+  });
+
+  it('should not alter the ordering of questions of the provided template', () => {
+    const question1 = Question.create('1', 'first');
+    const question2 = Question.create('2', 'second');
+    const question3 = Question.create('3', 'third');
+    const template = Template.create('my-q', [question1, question2, question3]);
+
+    Template.reorderQuestion(question3, 1, template);
+
+    expect(template.questions.length).toBe(3);
+    expect(template.questions[0]).toEqual(question1);
+    expect(template.questions[1]).toEqual(question2);
+    expect(template.questions[2]).toEqual(question3);
+  });
+});
+
+describe('Template.changeQuestionText', () => {
+  it('should change the question text in a copy of a template', () => {
+    const question1 = Question.create('1', 'q');
+    const question2 = Question.create('2', 'dd');
+    const template = Template.create('my-q', [question1, question2]);
+    const changedQuestion2 = Question.create('2', 'changed');
+
+    const updatedTemplate = Template.changeQuestionText(changedQuestion2, template);
+
+    expect(updatedTemplate.questions).toContainEqual(changedQuestion2);
+    expect(updatedTemplate.questions).not.toContainEqual(question2);
+  });
+
+  it('should not change the question text in the provided template', () => {
+    const question1 = Question.create('1', 'q');
+    const question2 = Question.create('2', 'dd');
+    const template = Template.create('my-q', [question1, question2]);
+    const changedQuestion2 = Question.create('2', 'changed');
+
+    Template.changeQuestionText(changedQuestion2, template);
+
+    expect(template.questions).not.toContainEqual(changedQuestion2);
     expect(template.questions).toContainEqual(question2);
   });
 });
