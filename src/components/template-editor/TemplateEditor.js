@@ -1,5 +1,5 @@
 import React from 'react';
-import { service as TemplateService } from '../../services/template-service';
+import { service as TemplateService } from '../../services/template-repository';
 import ViewTitle from '../shared/ViewTitle';
 import Question from './Question';
 import { Map } from 'immutable';
