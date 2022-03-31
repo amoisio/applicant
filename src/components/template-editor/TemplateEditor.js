@@ -5,7 +5,13 @@ import NewTemplateQuestion from './NewTemplateQuestion';
 import Template from '../../models/template';
 
 // TODO: Add reordering capability
+/**
+ * Template editor component
+ * @param {object} template Template
+ * @param {function} onSave onSave(template: object) callback function for persisting template changes.
+ */
 export default class TemplateEditor extends React.Component {
+
   constructor(props) {
     super(props);
     this.addQuestion = this.addQuestion.bind(this);

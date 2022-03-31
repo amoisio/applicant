@@ -1,6 +1,10 @@
 import React from 'react';
 import Button from '../shared/Button';
 
+/**
+ * New template question component for adding a question to a template
+ * @param {function} onAdd onAdd(text: string) callback function called when clicks 'Add'
+ */
 export default class NewTemplateQuestion extends React.Component {
   constructor(props) {
     super(props);
