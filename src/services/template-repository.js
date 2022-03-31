@@ -6,14 +6,14 @@ function get() {
   return ls(key);
 }
 
-function save(template) {
+function addOrUpdate(template) {
   ls(key, template);
   return template;
 }
 
 const api = {
   get: get,
-  save: save
-}
+  addOrUpdate: addOrUpdate,
+};
 
 export default api;

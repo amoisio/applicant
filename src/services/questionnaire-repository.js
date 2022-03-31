@@ -16,7 +16,17 @@ function getById(id) {
   return ls(`${key}.${id}`);
 }
 
-function save(questionnaire) {
+function getActive() {
+  return getAll()
+    .filter(q => !q.isCompleted)
+}
+
+function getCompleted() {
+  return getAll()
+    .filter(q => q.isCompleted);
+}
+
+function addOrUpdate(questionnaire) {
   ls(`${key}.${questionnaire.id}`, questionnaire);
   const index = getIndex();
   if (!index.some((i) => i === questionnaire.id)) {
@@ -29,7 +39,9 @@ function save(questionnaire) {
 const api = {
   getAll: getAll,
   getById: getById,
-  save: save,
+  getActive: getActive,
+  getCompleted: getCompleted,
+  addOrUpdate: addOrUpdate,
 };
 
 export default api;

@@ -18,7 +18,7 @@ function create(text, id, answer) {
   return {
     id: trimmedId ?? uuid(),
     text: trimmedText,
-    answer: trimmedAnswer,
+    answer: answer,
     isAnswered: !!trimmedAnswer,
   };
 }

@@ -8,11 +8,10 @@ import { trimmedOrDefault } from './common'
  * @returns A template question.
  */
 function create(text, id) {
-  const trimmedText = trimmedOrDefault(text);
   const trimmedId = trimmedOrDefault(id);
-  return { 
-    id: trimmedId ?? uuid(), 
-    text: trimmedText 
+  return {
+    id: trimmedId ?? uuid(),
+    text: text,
   };
 }
 
