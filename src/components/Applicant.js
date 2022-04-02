@@ -25,19 +25,21 @@ export default class Applicant extends React.Component {
       completedQuestionnaires: QuestionnaireRepository.getCompleted(),
     };
 
-    this.createQuestionnaire = this.createQuestionnaire.bind(this);
-    this.openArchive = this.openArchive.bind(this);
     this.openNavigation = this.openNavigation.bind(this);
+    
+    this.createQuestionnaire = this.createQuestionnaire.bind(this);
     this.openQuestionnaire = this.openQuestionnaire.bind(this);
-    this.openTemplate = this.openTemplate.bind(this);
-
     this.saveQuestionnaire = this.saveQuestionnaire.bind(this);
     this.completeQuestionnaire = this.completeQuestionnaire.bind(this);
-
+    
+    this.openTemplate = this.openTemplate.bind(this);
     this.saveTemplate = this.saveTemplate.bind(this);
+    
+    this.openArchive = this.openArchive.bind(this);
   }
 
   createQuestionnaire(title) {
+    console.log('Creating questionnaire');
     const template = this.state.template;
     const newQuestionnaire = QuestionnaireFactory.create(template, title);
     this.setState({
@@ -47,6 +49,7 @@ export default class Applicant extends React.Component {
   }
 
   openArchive() {
+    console.log('opening archive');
     const openQuestionnaires = this.state.openQuestionnaires;
     this.setState({
       renderKey: navigationKeys.archive,

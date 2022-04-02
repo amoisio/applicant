@@ -19,34 +19,41 @@ export default class TemplateEditor extends React.Component {
     this.removeQuestion = this.removeQuestion.bind(this);
   }
 
+  get template() {
+    return this.props.template;
+  }
+
+  get onSave() {
+    return this.props.onSave ?? (() => console.error('onSave callback not defined.'));
+  }
+
   addQuestion(text) {
-    const template = this.props.template;
+    const template = this.template;
     const modifiedTemplate = Template.addQuestion(text, template);
-    this.props.onSave(modifiedTemplate);
+    this.onSave(modifiedTemplate);
   }
 
   updateQuestion(id, modifiedText) {
-    const template = this.props.template;
+    const template = this.template;
     const modifiedTemplate = Template.changeQuestionText(id, modifiedText, template)
-    this.props.onSave(modifiedTemplate);
+    this.onSave(modifiedTemplate);
   }
 
   removeQuestion(id) {
-    const template = this.props.template;
+    const template = this.template;
     const modifiedTemplate = Template.removeQuestion(id, template);
-    this.props.onSave(modifiedTemplate);
+    this.onSave(modifiedTemplate);
   }
 
   render() {
-    const template = this.props.template;
+    const template = this.template;
     const questions = template.questions.map((question) => {
       return (
         <TemplateQuestion
           key={question.id}
-          id={question.id}
           question={question.text}
-          onChange={this.updateQuestion}
-          onRemove={this.removeQuestion}
+          onChange={(modifiedText) => this.updateQuestion(question.id, modifiedText)}
+          onRemove={() => this.removeQuestion(question.id)}
         />
       );
     });
