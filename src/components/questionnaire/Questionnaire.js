@@ -4,7 +4,9 @@ import ViewTitle from '../shared/ViewTitle';
 import Questionnaire from '../../models/questionnaire';
 
 /**
- * 
+ * Questionnaire editor component
+ * @param {object} questionnaire Questionnaire.
+ * @param {function} onSave onSave(questionnaire) callback function called when changes to questionnaire are saved.
  */
 export default class QuestionnaireEditor extends React.Component {
   constructor(props) {
