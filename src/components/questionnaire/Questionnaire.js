@@ -1,16 +1,21 @@
 import React from 'react';
 import QuestionWithAnswer from './QuestionWithAnswer';
 import ViewTitle from '../shared/ViewTitle';
+import Questionnaire from '../../models/questionnaire';
 
-export default class Questionnaire extends React.Component {
+/**
+ * 
+ */
+export default class QuestionnaireEditor extends React.Component {
   constructor(props) {
     super(props);
-    this.addQuestion = this.addQuestion.bind(this);
-    this.updateQuestion = this.updateQuestion.bind(this);
-    this.removeQuestion = this.removeQuestion.bind(this);
+    this.updateAnswer = this.updateAnswer.bind(this);
+    this.completeQuestionnaire = this.completeQuestionnaire.bind(this);
   }
 
-
+  get questionnaire() {
+    return this.props.questionnaire;
+  }
 
   get title() {
     return this.props.questionnaire.title;
@@ -20,26 +25,20 @@ export default class Questionnaire extends React.Component {
     return this.props.questionnaire.questions;
   }
 
-  addQuestion(text) {
-    const template = this.props.template;
-    const modifiedTemplate = Template.addQuestion(text, template);
-    this.props.onSave(modifiedTemplate);
+  get onSave() {
+    return this.props.onSave;
   }
 
-  updateQuestion(id, modifiedText) {
-    const template = this.props.template;
-    const modifiedTemplate = Template.changeQuestionText(
-      id,
-      modifiedText,
-      template
-    );
-    this.props.onSave(modifiedTemplate);
+  updateAnswer(id, modifiedAnswer) {
+    const questionnaire = this.questionnaire;
+    const modifiedQuestionnaire = Questionnaire.answer(id, modifiedAnswer, questionnaire);
+    this.onSave(modifiedQuestionnaire);
   }
 
-  removeQuestion(id) {
-    const template = this.props.template;
-    const modifiedTemplate = Template.removeQuestion(id, template);
-    this.props.onSave(modifiedTemplate);
+  completeQuestionnaire() {
+    const questionnaire = this.questionnaire;
+    const modifiedQuestionnaire = Questionnaire.complete(questionnaire);
+    this.onSave(modifiedQuestionnaire);
   }
 
   render() {
@@ -47,9 +46,11 @@ export default class Questionnaire extends React.Component {
       return (
         <QuestionWithAnswer
           key={question.id}
-          id={question.id}
           question={question.text}
-          onChange={this.updateQuestion}
+          answer={question.answer}
+          onChange={(modifiedAnswer) =>
+            this.updateAnswer(question.id, modifiedAnswer)
+          }
         />
       );
     });
@@ -58,6 +59,7 @@ export default class Questionnaire extends React.Component {
       <div id='questionnaire'>
         <ViewTitle>{this.title}</ViewTitle>
         {questions}
+        <Button onClick={this.completeQuestionnaire}>Complete</Button>
       </div>
     );
   }
