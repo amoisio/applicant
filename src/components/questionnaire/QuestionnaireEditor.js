@@ -1,10 +1,12 @@
 import QuestionWithAnswer from './QuestionWithAnswer';
 import ViewTitle from '../shared/ViewTitle';
+import Button from '../shared/Button';
 
 /**
  * Questionnaire editor component
- * @param {object} questionnaireRepository Questionnaire repository.
- * @param {string} id Questionnaire id.
+ * @param {object} questionnaire Questionnaire.
+ * @param {function} onAnswer onAnswer(id: string, modifiedAnswer: string) callback function called when changing answer text.
+ * @param {function} onComplete onComplete(id: string) callback function called when completing the questionnaire.
  */
 export default function QuestionnaireEditor(props) {
   const questionnaire = props.questionnaire;

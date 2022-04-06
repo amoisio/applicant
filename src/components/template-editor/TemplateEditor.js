@@ -5,10 +5,12 @@ import NewTemplateQuestion from './NewTemplateQuestion';
 // TODO: Add reordering capability
 /**
  * Template editor component
- * @param {object} templateRepository Template repository.
- */
+ * @param {object} template Template repository.
+ * @param {function} onAdd onAdd(text: string) callback function called when adding a new question.
+ * @param {function} onChange onChange(id: string, modifiedText: string) callback function called when changing question text.
+ * @param {function} onRemove onRemove(id: string) callback function called when removing a question.
+ */ 
 export default function TemplateEditor(props) {
-  
   const template = props.template;
   if (!template) {
     throw new Error('Template must be given.');

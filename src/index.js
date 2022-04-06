@@ -3,10 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Applicant from './components/Applicant';
+import TemplateRepository from './services/template-repository';
+import QuestionnaireRepository from './services/questionnaire-repository';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Applicant />
+    <Applicant
+      title='Applicant'
+      templateRepository={TemplateRepository}
+      questionnaireRepository={QuestionnaireRepository}
+    />
   </React.StrictMode>,
   document.getElementById('root')
 );

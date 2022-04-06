@@ -10,7 +10,7 @@ import Button from '../shared/Button';
  */
 export default function Navigation(props) {
   const questionnaires = props.openQuestionnaires.map(q => {
-    return <Button onClick={() => props.onOpenQuestionnaire(q.id)}>{q.title}</Button>
+    return <Button onClick={() => props.onOpenQuestionnaire(q)}>{q.title}</Button>
   });
   return (
     <div className='navigation'>
