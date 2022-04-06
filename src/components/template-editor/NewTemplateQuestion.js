@@ -1,6 +1,5 @@
 import React from 'react';
-import Button from '../shared/Button';
-import { trimmedOrDefault } from '../../models/common';
+
 /**
  * New template question component for adding a question to a template
  * @param {function} onAdd onAdd(text: string) callback function called when clicks 'Add'
@@ -8,6 +7,9 @@ import { trimmedOrDefault } from '../../models/common';
 export default class NewTemplateQuestion extends React.Component {
   constructor(props) {
     super(props);
+    if (!props.onAdd) {
+      throw new Error('onAdd callback not defined.');
+    }
     this.state = {
       value: '',
     };
@@ -15,10 +17,14 @@ export default class NewTemplateQuestion extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  get onAdd() {
+    return this.props.onAdd;
+  }
+
   handleAdd() {
     const text = trimmedOrDefault(this.state.value);
     if (text) {
-      this.props.onAdd(text);
+      this.onAdd(text);
     }
     this.setState({ value: '' });
   }
