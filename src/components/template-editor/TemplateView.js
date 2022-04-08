@@ -27,6 +27,7 @@ export default class TemplateView extends React.Component {
     this.addQuestion = this.addQuestion.bind(this);
     this.updateQuestion = this.updateQuestion.bind(this);
     this.removeQuestion = this.removeQuestion.bind(this);
+    this.reorderQuestion = this.reorderQuestion.bind(this);
   }
 
   get templateRepository() {
@@ -42,6 +43,7 @@ export default class TemplateView extends React.Component {
         onAdd={this.addQuestion}
         onChange={this.updateQuestion}
         onRemove={this.removeQuestion}
+        onReorder={this.reorderQuestion}
       />
     );
   }
@@ -68,9 +70,15 @@ export default class TemplateView extends React.Component {
     this.save(modifiedTemplate);
   }
 
+  reorderQuestion(id, newIndex) {
+    const template = this.state.template;
+    const modifiedTemplate = Template.reorderQuestion(id, newIndex, template);
+    this.save(modifiedTemplate);
+  }
+
   save(template) {
     console.log('save template');
-    this.templateRepository.addOrUpdate(template);
+    this.templateRepository.addOrUpdateTemplate(template);
     this.setState({
       template: template,
     });

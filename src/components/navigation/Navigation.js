@@ -27,7 +27,9 @@ export default class Navigation extends React.Component {
   render() {
     const questionnaires = this.props.openQuestionnaires.map((q) => {
       return (
-        <Button onClick={() => this.props.onOpenQuestionnaire(q)}>
+        <Button 
+          key={q.id}
+          onClick={() => this.props.onOpenQuestionnaire(q)}>
           {q.title}
         </Button>
       );
@@ -37,7 +39,7 @@ export default class Navigation extends React.Component {
         {questionnaires}
         <input
           type='text'
-          placeholder='Enter questionnaire name...'
+          placeholder='Questionnaire title...'
           onChange={(e) => this.onChange(e.target.value)}
           value={this.state.questionnaireTitle}
         ></input>
