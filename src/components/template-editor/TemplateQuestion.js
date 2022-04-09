@@ -25,7 +25,7 @@ export default function TemplateQuestion(props) {
       <Icon icon='grip-vertical' />
       <InputText onChange={onChange}>{question}</InputText>
       <Button onClick={onRemove}>
-        <Icon icon='trash' />
+        <Icon icon='x-lg' />
       </Button>
     </div>
   );

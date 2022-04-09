@@ -40,11 +40,9 @@ export default class NewTemplateQuestion extends React.Component {
   render() {
     return (
       <div className='template-question new-template-question'>
-        <InputText onChange={this.handleChange}>
-          {this.state.value}
-        </InputText>
+        <InputText onChange={this.handleChange}>{this.state.value}</InputText>
         <Button onClick={this.handleAdd}>
-          <Icon icon='plus-circle' />
+          <Icon icon='plus-lg' />
         </Button>
       </div>
     );

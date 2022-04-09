@@ -4,6 +4,6 @@
  */
 export default function Icon(props) {
   const icon = props.icon ?? 'x-lg';
-  const cl = `bi-${icon}`;
+  const cl = `icon bi-${icon}`;
   return <i className={cl}></i>;
 }
