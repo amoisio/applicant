@@ -1,7 +1,6 @@
 import Button from '../shared/Button';
 import Icon from '../shared/Icon';
-import InputText from '../shared/InputText';
-
+import AutoGrowTextarea from '../shared/AutoGrowTextarea';
 /**
  * Template question component for editing and signaling the desire to remove a question from a template.
  * @param {string} question Question text
@@ -19,11 +18,17 @@ export default function TemplateQuestion(props) {
   if (!onRemove) {
     throw new Error('onRemove callback not defined.');
   }
-  
+
   return (
     <div className='template-question'>
-      <Icon icon='grip-vertical' />
-      <InputText onChange={onChange}>{question}</InputText>
+        <Icon icon='grip-vertical' />
+      {/* <div>
+      </div> */}
+      <AutoGrowTextarea
+        placeholder='Enter question text...'
+        onChange={onChange}
+        value={question}
+      />
       <Button onClick={onRemove}>
         <Icon icon='x-lg' />
       </Button>

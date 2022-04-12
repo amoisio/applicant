@@ -58,15 +58,13 @@ main div.navigation {
   border: 2px solid #6b9080;
 }
 
-.new-template-question {
-
-}
-
 .template-question > .icon {
   background-color: #a4c3b2;
   color: #f6fff8;
   font-size: x-large;
-  padding: 0.25rem 0 0.125rem 0;
+  padding: 0.125rem 0 0.125rem 0;
+  display: flex;
+  align-items: center;
 }
 
 .template-question > .icon:hover {
@@ -80,6 +78,8 @@ main div.navigation {
   border: 0;
   padding: 0.7rem;
 }
+
+
 
 .template-question > button {
   background-color: #a4c3b2;
