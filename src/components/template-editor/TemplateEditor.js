@@ -1,6 +1,7 @@
 import ViewTitle from '../shared/ViewTitle';
 import TemplateQuestion from './TemplateQuestion';
 import NewTemplateQuestion from './NewTemplateQuestion';
+import './TemplateEditor.css';
 
 /**
  * Template editor component

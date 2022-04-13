@@ -1,23 +1,15 @@
-.input-sizer {
+.auto-grow {
   display: inline-grid;
   width: 100%;
   vertical-align: middle;
   align-items: center;
   position: relative;
   
-}
-
-.input-sizer.stacked {
   align-items: stretch;
 }
 
-.input-sizer.stacked::after,
-.input-sizer.stacked textarea {
-  grid-area: 1/1;
-}
-
-.input-sizer::after,
-.input-sizer textarea {
+.auto-grow::after,
+.auto-grow textarea {
   width: auto;
   font: inherit;
   padding: 0.7rem;
@@ -28,11 +20,17 @@
      -moz-appearance: none;
           appearance: none;
   border: none;
+
+  grid-area: 1/1;
 }
 
-.input-sizer::after {
+.auto-grow::after {
   content: attr(data-value) " ";
   font-size:1;
   visibility: hidden;
   white-space: pre-wrap;
+}
+
+.auto-grow .single-line-textarea {
+  height: 20px;
 }

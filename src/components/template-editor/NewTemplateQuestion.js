@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '../shared/Button';
 import { trimmedOrDefault } from '../../models/common';
 import Icon from '../shared/Icon';
-import InputText from '../shared/InputText';
+import AutoGrowTextarea from '../shared/AutoGrowTextarea';
 
 /**
  * New template question component for adding a question to a template
@@ -40,8 +40,12 @@ export default class NewTemplateQuestion extends React.Component {
   render() {
     return (
       <div className='template-question new-template-question'>
-        <InputText onChange={this.handleChange}>{this.state.value}</InputText>
-        <Button onClick={this.handleAdd}>
+        <AutoGrowTextarea
+          placeholder='Enter question text...'
+          onChange={this.handleChange}
+          value={this.state.value}
+        />
+        <Button onClick={this.handleAdd} className='action-button'>
           <Icon icon='plus-lg' />
         </Button>
       </div>

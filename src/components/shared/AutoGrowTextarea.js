@@ -8,21 +8,18 @@ import './AutoGrowTextarea.css';
  */
 export default function AutoGrowTextarea(props) {
   const numberOfLines = (text) => {
-    if (!text) {
-      return 0;
-    }
-    return text.match(/\n/g)?.length ?? 0;
+    return (text?.match(/\n/g)?.length ?? 0) + 1;
   }
   const lines = numberOfLines(props.value);
-  const style = (lines === 0) 
-    ? { height: '20px' }
-    : {};
+  const className  = (lines === 1) 
+    ? 'single-line-textarea'
+    : null;
 
-  return (
-    <div className='input-sizer stacked' data-value={props.value}>
+    return (
+    <div className='auto-grow' data-value={props.value}>
       <textarea
         rows='1'
-        style={style}
+        className={className}
         placeholder={props.placeholder}
         onChange={(e) => props.onChange(e.target.value)}
         value={props.value}
