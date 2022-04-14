@@ -1,7 +1,7 @@
 import React from 'react';
 import Template from '../../models/template';
 import TemplateEditor from './TemplateEditor';
-
+import './TemplateView.css';
 /**
  * Template view component manages template state.
  * @param {object} template Template.

@@ -10,6 +10,7 @@ export default function AutoGrowTextarea(props) {
   const numberOfLines = (text) => {
     return (text?.match(/\n/g)?.length ?? 0) + 1;
   }
+  // TODO: Need to manage the wrapping of a single line of text
   const lines = numberOfLines(props.value);
   const className  = (lines === 1) 
     ? 'single-line-textarea'
@@ -23,6 +24,7 @@ export default function AutoGrowTextarea(props) {
         placeholder={props.placeholder}
         onChange={(e) => props.onChange(e.target.value)}
         value={props.value}
+        tabIndex="0"
       />
     </div>
   );

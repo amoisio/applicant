@@ -21,7 +21,7 @@ export default function TemplateQuestion(props) {
 
   return (
     <div className='template-question'>
-      <Icon icon='grip-vertical' className='drag-button'/>
+      <Icon icon='grip-vertical' className='drag-button' tabIndex='0' />
       <AutoGrowTextarea
         placeholder='Enter question text...'
         onChange={onChange}
