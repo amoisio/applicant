@@ -2,6 +2,8 @@ import React from 'react';
 import Template from '../../models/template';
 import TemplateEditor from './TemplateEditor';
 import './TemplateView.css';
+import Button from '../shared/Button';
+
 /**
  * Template view component manages template state.
  * @param {object} template Template.
@@ -38,13 +40,16 @@ export default class TemplateView extends React.Component {
     console.log('Rendering template editor');
     const template = this.state.template;
     return (
-      <TemplateEditor
-        template={template}
-        onAdd={this.addQuestion}
-        onChange={this.updateQuestion}
-        onRemove={this.removeQuestion}
-        onReorder={this.reorderQuestion}
-      />
+      <div>
+        <Button >Menu</Button>
+        <TemplateEditor
+          template={template}
+          onAdd={this.addQuestion}
+          onChange={this.updateQuestion}
+          onRemove={this.removeQuestion}
+          onReorder={this.reorderQuestion}
+        />
+      </div>
     );
   }
 

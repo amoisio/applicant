@@ -61,6 +61,7 @@ export default function TemplateEditor(props) {
           question={question.text}
           onChange={(modifiedText) => onChange(question.id, modifiedText)}
           onRemove={() => onRemove(question.id)}
+          orderNumber={index + 1}
         />
       </div>
     );
@@ -68,10 +69,10 @@ export default function TemplateEditor(props) {
 
   return (
     <div id='template-editor'>
-      <ViewTitle>Template questions</ViewTitle>
-      <div id='template-questions'>{questions}</div>
       <ViewTitle>Add new question</ViewTitle>
       <NewTemplateQuestion onAdd={onAdd} />
+      <ViewTitle>Template questions</ViewTitle>
+      <div id='template-questions'>{questions}</div>
     </div>
   );
 }

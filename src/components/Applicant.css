@@ -57,23 +57,3 @@ footer {
     /* border: 1px solid black; */
   }
 }
-
-
-/* 
-.action-button:hover {
-  outline: none !important;
-  box-shadow: 0 0 10px 2px black;
-}
-
-.template-question .drag-button:focus, .template-question  {
-  outline: none !important;
-  box-shadow: 0 0 10px 2px black;
-  background-color: #cce3de;
-  color: #6b9080;
-}
-
-
-.auto-grow textarea:focus,  {
-  outline: none !important;
-  box-shadow: 0 0 10px 2px black;
-} */

@@ -1,4 +1,3 @@
-import Button from './Button';
 
 /**
  * Footer component
@@ -8,7 +7,7 @@ import Button from './Button';
 export default function Footer(props) {
   return (
     <footer>
-      <Button onClick={props.onClick}>Menu</Button>
+      <p>Footer here</p>
     </footer>
   );
 }
