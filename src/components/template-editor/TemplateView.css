@@ -63,7 +63,8 @@
 }
 
 /* Focusable item highlights */
-:focus,
+textarea:focus,
+button:focus,
 button:hover,
 .action-button:hover,
 .auto-grow > textarea:hover {
