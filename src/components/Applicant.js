@@ -1,5 +1,6 @@
 import React from 'react';
 import './Applicant.css';
+import './navigation/Navigation.css';
 import Navigation from './navigation/Navigation';
 import navigationKeys from './navigation/navigation-keys';
 import Footer from './shared/Footer';
@@ -51,13 +52,14 @@ export default class Applicant extends React.Component {
     return (
       <div className='applicant'>
         <div className='applicant-header'>
-          <Header>{pageTitle}</Header>
+          <Header onOpenMenu={this.openNavigation}>{pageTitle}</Header>
         </div>
-        <div className='applicant-content'>
-          {element}
-        </div>
+        <div className='applicant-content'>{element}</div>
         <div className='applicant-footer'>
-          <Footer onClick={this.openNavigation} />
+          <Footer
+            onOpenTemplate={this.openTemplate}
+            onOpenArchive={this.openArchive}
+          />
         </div>
       </div>
     );

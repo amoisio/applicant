@@ -4,7 +4,10 @@
   flex-direction: row;
   justify-content: center;
   min-height: 100vh;
-  
+}
+
+a {
+  color: #1d3557;
 }
 
 .applicant {
@@ -67,10 +70,9 @@
   flex-direction: row;
   flex-grow: 1;
   justify-content: center;
-  align-items: center;
   background-color: #f1faee;
   color: #1d3557;
-  margin-bottom: 4rem;
+  padding-bottom: 4rem;
 }
 
 .applicant-content main {
@@ -82,14 +84,7 @@
 .applicant-footer {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
   justify-content: center;
   background-color: #1d3557;
-  color: #f1faee;
   min-height: 200px;
-}
-
-.applicant-footer footer {
-  display: flex;
-  flex-basis: 576px;
 }

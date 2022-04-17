@@ -1,5 +1,9 @@
 import React from 'react';
+import './Navigation.css';
 import Button from '../shared/Button';
+import Icon from '../shared/Icon';
+import NavLink from '../shared/NavLink';
+import AutoGrowTextarea from '../shared/AutoGrowTextarea';
 
 /**
  * Landing page navigation component.
@@ -27,31 +31,32 @@ export default class Navigation extends React.Component {
   render() {
     const questionnaires = this.props.openQuestionnaires.map((q) => {
       return (
-        <Button 
-          key={q.id}
+        <NavLink 
+          key={q.id}  
           onClick={() => this.props.onOpenQuestionnaire(q)}>
           {q.title}
-        </Button>
+          <Icon icon='chevron-right'/>
+        </NavLink>
       );
     });
     return (
-      <main class="navigation">
+      <main className='navigation'>
+        <div className='new-questionnaire'>
+          <AutoGrowTextarea
+            placeholder='New questionnaire title...'
+            onChange={this.onChange}
+            value={this.state.questionnaireTitle}
+          />
+          <Button
+            onClick={() =>
+              this.props.onCreateQuestionnaire(this.state.questionnaireTitle)
+            }
+            className='action-button'
+          >
+            <Icon icon='chevron-right' />
+          </Button>
+        </div>
         {questionnaires}
-        <input
-          type='text'
-          placeholder='Questionnaire title...'
-          onChange={(e) => this.onChange(e.target.value)}
-          value={this.state.questionnaireTitle}
-        ></input>
-        <Button
-          onClick={() =>
-            this.props.onCreateQuestionnaire(this.state.questionnaireTitle)
-          }
-        >
-          New
-        </Button>
-        <Button onClick={this.props.onOpenTemplate}>Template</Button>
-        <Button onClick={this.props.onOpenArchive}>Archive</Button>
       </main>
     );
   }

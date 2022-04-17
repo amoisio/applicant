@@ -1,5 +1,6 @@
 import ApplicationTitle from './ApplicationTitle';
 import Icon from './Icon';
+import NavLink from './NavLink';
 
 /**
  * Header component
@@ -9,12 +10,10 @@ export default function Header(props) {
   return (
     <header>
       <ApplicationTitle>{props.children}</ApplicationTitle>
-      <div className='nav-link'>
-        <a href='/'>
-          <Icon icon='chevron-left' />
-          MENU
-        </a>
-      </div>
+      <NavLink href='#' onClick={props.onOpenMenu}>
+        <Icon icon='chevron-left' />
+        MENU
+      </NavLink>
     </header>
   );
 }
