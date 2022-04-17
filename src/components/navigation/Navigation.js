@@ -35,7 +35,7 @@ export default class Navigation extends React.Component {
       );
     });
     return (
-      <div className='navigation'>
+      <main class="navigation">
         {questionnaires}
         <input
           type='text'
@@ -52,7 +52,7 @@ export default class Navigation extends React.Component {
         </Button>
         <Button onClick={this.props.onOpenTemplate}>Template</Button>
         <Button onClick={this.props.onOpenArchive}>Archive</Button>
-      </div>
+      </main>
     );
   }
 }

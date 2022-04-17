@@ -3,57 +3,87 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  height: 100vh;
-  background-color: #cce3de;
+  min-height: 100vh;
   
 }
 
 .applicant {
   display: flex;
   flex-direction: column;
-  flex-basis: 100%;
-  padding: 1rem;
-  margin: 1rem;
-  border-radius: 1rem;
-  border: 2px solid #6b9080;
-  color: #6b9080;
-  background-color: #eaf4f4;
-}
-
-header {
-  display: flex;
-  align-self: center;
-}
-
-main {
-  display: flex;
-  flex-direction: column;
-  flex-basis: 100%;
   width: 100%;
-  align-self: center;
-  
+  /* padding: 1rem; */
 }
 
-main div.navigation {
-  display: flex;
-  flex-direction: column;
-}
-
-footer {
+.applicant-header {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  max-height: fit-content;
+  background-color: #f1faee;
+  color: #1d3557;
+}
+
+.applicant-header header {
+  display: flex;
+  flex-direction: row;
+  flex-basis: 576px;
   justify-content: space-between;
 }
 
-.footerMenu {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.applicant-header header .application-title {
+  margin-top: 2rem;
+  font-size: 3rem;
+  font-family: Tahoma, sans-serif;
+  font-variant: small-caps;
+  font-weight: 700;
 }
 
-@media screen and (min-width: 576px) {
-  .applicant {
-    flex-basis: 576px;
-    /* border: 1px solid black; */
-  }
+.applicant-header header .nav-link {
+  flex-shrink: 1;
+  align-self: flex-end;
+  margin-bottom: 1rem;
+  font-variant: small-caps;
+  letter-spacing: 0.5rem;
+  border-right: 1rem solid #a8dadc;
+}
+
+.applicant-header header .nav-link a {
+  text-decoration: none;
+}
+  
+.applicant-header header .nav-link:focus,
+.applicant-header header .nav-link:hover {
+  border-right: 1rem solid #e63946;
+  
+}
+
+.applicant-content {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: #f1faee;
+  color: #1d3557;
+}
+
+.applicant-content main {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 576px;
+}
+
+.applicant-footer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  background-color: #1d3557;
+  color: #f1faee;
+  min-height: 200px;
+}
+
+.applicant-footer footer {
+  display: flex;
+  flex-basis: 576px;
 }

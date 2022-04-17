@@ -2,7 +2,6 @@ import React from 'react';
 import Template from '../../models/template';
 import TemplateEditor from './TemplateEditor';
 import './TemplateView.css';
-import Button from '../shared/Button';
 
 /**
  * Template view component manages template state.
@@ -40,8 +39,7 @@ export default class TemplateView extends React.Component {
     console.log('Rendering template editor');
     const template = this.state.template;
     return (
-      <div>
-        <Button >Menu</Button>
+      <main>
         <TemplateEditor
           template={template}
           onAdd={this.addQuestion}
@@ -49,7 +47,7 @@ export default class TemplateView extends React.Component {
           onRemove={this.removeQuestion}
           onReorder={this.reorderQuestion}
         />
-      </div>
+      </main>
     );
   }
 

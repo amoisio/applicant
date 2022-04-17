@@ -41,7 +41,7 @@ export default class NewTemplateQuestion extends React.Component {
     return (
       <div className='template-question new-template-question'>
         <AutoGrowTextarea
-          placeholder='Enter question text...'
+          placeholder='New question text...'
           onChange={this.handleChange}
           value={this.state.value}
         />

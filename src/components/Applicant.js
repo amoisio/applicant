@@ -50,9 +50,15 @@ export default class Applicant extends React.Component {
     const element = this.renderActiveElement();
     return (
       <div className='applicant'>
-        <Header>{pageTitle}</Header>
-        <main>{element}</main>
-        <Footer onClick={this.openNavigation} />
+        <div className='applicant-header'>
+          <Header>{pageTitle}</Header>
+        </div>
+        <div className='applicant-content'>
+          {element}
+        </div>
+        <div className='applicant-footer'>
+          <Footer onClick={this.openNavigation} />
+        </div>
       </div>
     );
   }

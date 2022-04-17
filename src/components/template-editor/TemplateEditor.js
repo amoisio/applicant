@@ -69,9 +69,8 @@ export default function TemplateEditor(props) {
 
   return (
     <div id='template-editor'>
-      <ViewTitle>Add new question</ViewTitle>
+      <ViewTitle>Add and edit template questions</ViewTitle>
       <NewTemplateQuestion onAdd={onAdd} />
-      <ViewTitle>Template questions</ViewTitle>
       <div id='template-questions'>{questions}</div>
     </div>
   );

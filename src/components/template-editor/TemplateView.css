@@ -6,16 +6,15 @@
 #template-questions {
   display: flex;
   flex-direction: column;
-  width: 100%;
 }
 
 .template-question {
   display: flex;
   flex-direction: row;
   margin-bottom: 1rem;
-  border-radius: 4px;
-  box-shadow: 6px 6px 0px 0px #a4c3b2;
-  border: 2px solid #6b9080;
+  border-radius: 0;
+  box-shadow: 6px 6px 0px 0px #457b9d;
+  border: 2px solid #1d3557;
 }
 
 .template-question .icon {
@@ -72,13 +71,4 @@ button:hover,
   box-shadow: 0 0 10px 2px black;
 }
 
-/* Button */
-button {
-  font-weight: 700;
-  padding: 0.5rem;
-  background-color: #a4c3b2;
-  color: #f6fff8;
-  border: 2px solid #6b9080;
-  border-radius: 4px;
-  box-shadow: 6px 6px 0px 0px #a4c3b2;
-}
+
