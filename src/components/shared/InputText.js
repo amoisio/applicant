@@ -9,7 +9,7 @@ export default function InputText(props) {
       type='text'
       placeholder={props.placeholder}
       onChange={(e) => props.onChange(e.target.value)}
-      value={props.children}
+      value={props.value}
     />
   );
 }

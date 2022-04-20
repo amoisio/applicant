@@ -11,7 +11,7 @@ export default function Footer(props) {
   return (
     <footer>
       <div className='copyright'>
-        <p>Applicant, 2022 (c) Aleksi Moisio</p>
+        <span>&copy; 2022 Aleksi Moisio</span>
       </div>
       <div className='links'>
         <NavLink onClick={props.onOpenTemplate}>

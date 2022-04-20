@@ -1,6 +1,5 @@
 import React from 'react';
 import './Applicant.css';
-import './navigation/Navigation.css';
 import Navigation from './navigation/Navigation';
 import navigationKeys from './navigation/navigation-keys';
 import Footer from './shared/Footer';

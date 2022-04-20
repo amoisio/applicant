@@ -3,7 +3,7 @@ import './Navigation.css';
 import Button from '../shared/Button';
 import Icon from '../shared/Icon';
 import NavLink from '../shared/NavLink';
-import AutoGrowTextarea from '../shared/AutoGrowTextarea';
+import InputText from '../shared/InputText';
 
 /**
  * Landing page navigation component.
@@ -40,9 +40,9 @@ export default class Navigation extends React.Component {
       );
     });
     return (
-      <main className='navigation'>
+      <main>
         <div className='new-questionnaire'>
-          <AutoGrowTextarea
+          <InputText
             placeholder='New questionnaire title...'
             onChange={this.onChange}
             value={this.state.questionnaireTitle}

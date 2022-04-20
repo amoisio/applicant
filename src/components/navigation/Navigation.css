@@ -1,15 +1,47 @@
-.applicant-content main.navigation {
+main {
   display: flex;
   flex-direction: column;
   color: #1d3557;
-  margin-top: 3rem;
 }
 
-.applicant-content main.navigation h1 {
-  align-self: center;
+main .new-questionnaire {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1rem;
+  box-shadow: 6px 6px 0px 0px #457b9d;
+  border: 2px solid #1d3557;
 }
 
-.applicant-content main.navigation .nav-link {
+main .new-questionnaire input {
+  display: flex;
+  width: 100%;
+  border: 0;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+main .new-questionnaire .icon {
+  font-size: x-large;
+  padding: 0.125rem 0 0.125rem 0;
+  display: flex;
+  align-items: center;
+}
+
+main .new-questionnaire .action-button {
+  border: 0;
+  box-shadow: none;
+  background-color: #e2075b;
+  color: white;
+}
+
+main .new-questionnaire .action-button:focus,
+main .new-questionnaire .action-button:hover {
+  background-color: #dca8bc;
+  color: #e2075b;
+  cursor: pointer;
+}
+
+main .nav-link a {
   flex-shrink: 1;
   margin-top:1rem;
   margin-bottom: 1rem;
@@ -18,49 +50,12 @@
   font-weight: bolder;
   font-size: larger;
   letter-spacing: 0.5rem;
-  border-left: 1rem solid #a8dadc;
-}
-
-.applicant-content main.navigation .nav-link a {
+  border-left: 1rem solid #dca8bc;
   text-decoration: none;
 }
   
-.applicant-content main.navigation .nav-link:focus,
-.applicant-content main.navigation .nav-link:hover {
-  color:#e63946;
-  border-left: 1rem solid #e63946;
-}
-
-.applicant-content main.navigation .nav-link a:focus,
-.applicant-content main.navigation .nav-link a:hover {
-  color:#e63946;
-}
-
-.new-questionnaire {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 1rem;
-  box-shadow: 6px 6px 0px 0px #457b9d;
-  border: 2px solid #1d3557;
-}
-
-.new-questionnaire .icon {
-  font-size: x-large;
-  padding: 0.125rem 0 0.125rem 0;
-  display: flex;
-  align-items: center;
-}
-
-/* Action buttons */
-.new-questionnaire .action-button {
-  border: 0;
-  box-shadow: none;
-  background-color: #a8dadc;
-  color: #457b9d;
-}
-
-.new-questionnaire .action-button:focus,
-.new-questionnaire .action-button:hover {
-  background-color: #1d3557;
-  color: white;
+main .nav-link a:focus,
+main .nav-link a:hover {
+  color:#e2075b;
+  border-left: 1rem solid #e2075b;
 }

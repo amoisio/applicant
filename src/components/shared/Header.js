@@ -1,6 +1,7 @@
 import ApplicationTitle from './ApplicationTitle';
 import Icon from './Icon';
 import NavLink from './NavLink';
+import './Header.css';
 
 /**
  * Header component
