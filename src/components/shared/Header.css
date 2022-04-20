@@ -3,13 +3,13 @@ header {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-top: 1rem;
   width: 576px;
 }
 
 header .application-title {
   display: flex;
   flex-grow: 1;
-  margin-top: 1rem;
   margin-left: 1rem;
   font-size: 3rem;
   font-family: Tahoma, sans-serif;
@@ -20,6 +20,7 @@ header .application-title {
 header .nav-link a {
   font-variant: small-caps;
   letter-spacing: 0.5rem;
+  margin-right: 1rem;
   border-right: 1rem solid #dca8bc;
   text-decoration: none;
 }

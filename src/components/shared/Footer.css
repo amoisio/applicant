@@ -25,6 +25,7 @@ footer .links .nav-link a {
   font-variant: small-caps;
   justify-self: flex-end;
   letter-spacing: 0.5rem;
+  margin-right: 1rem;
   border-right: 1rem solid #dca8bc;
   color: white;
   text-decoration: none;
