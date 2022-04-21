@@ -1,6 +1,7 @@
 import React from 'react';
 import Template from '../../models/template';
 import TemplateEditor from './TemplateEditor';
+import ViewTitle from '../shared/ViewTitle';
 import './TemplateView.css';
 
 /**
@@ -39,7 +40,8 @@ export default class TemplateView extends React.Component {
     console.log('Rendering template editor');
     const template = this.state.template;
     return (
-      <main>
+      <main className='template'>
+        <ViewTitle>Template questions</ViewTitle>
         <TemplateEditor
           template={template}
           onAdd={this.addQuestion}

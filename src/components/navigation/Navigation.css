@@ -1,4 +1,4 @@
-main {
+.navigation {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -8,7 +8,7 @@ main {
   width: 450px;
 }
 
-main .new-questionnaire {
+.navigation .new-questionnaire {
   display: flex;
   flex-direction: row;
   margin-bottom: 1rem;
@@ -18,7 +18,7 @@ main .new-questionnaire {
   border: 2px solid #1d3557;
 }
 
-main .new-questionnaire input {
+.navigation .new-questionnaire input {
   display: flex;
   width: 100%;
   border: 0;
@@ -26,28 +26,28 @@ main .new-questionnaire input {
   padding-right: 1rem;
 }
 
-main .new-questionnaire .icon {
+.navigation .new-questionnaire .icon {
   font-size: x-large;
   padding: 0.125rem 0 0.125rem 0;
   display: flex;
   align-items: center;
 }
 
-main .new-questionnaire .action-button {
+.navigation .new-questionnaire .action-button {
   border: 0;
   box-shadow: none;
-  background-color: #e2075b;
-  color: white;
+  background-color: #d1f6cc;
+  color: #3ac265;
 }
 
-main .new-questionnaire .action-button:focus,
-main .new-questionnaire .action-button:hover {
-  background-color: #dca8bc;
-  color: #e2075b;
+.navigation .new-questionnaire .action-button:focus,
+.navigation .new-questionnaire .action-button:hover {
+  background-color: #3ac265;
+  color: #d1f6cc;
   cursor: pointer;
 }
 
-main .nav-link a {
+.navigation .nav-link a {
   flex-shrink: 1;
   margin-top:1rem;
   margin-bottom: 1rem;
@@ -60,8 +60,8 @@ main .nav-link a {
   text-decoration: none;
 }
   
-main .nav-link a:focus,
-main .nav-link a:hover {
+.navigation .nav-link a:focus,
+.navigation .nav-link a:hover {
   color:#e2075b;
   border-left: 1rem solid #e2075b;
 }

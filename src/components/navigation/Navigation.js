@@ -40,7 +40,7 @@ export default class Navigation extends React.Component {
       );
     });
     return (
-      <main>
+      <main className='navigation'>
         <div className='new-questionnaire'>
           <InputText
             placeholder='New questionnaire title...'
@@ -53,7 +53,7 @@ export default class Navigation extends React.Component {
             }
             className='action-button'
           >
-            <Icon icon='chevron-right' />
+            <Icon icon='plus-lg' />
           </Button>
         </div>
         {questionnaires}

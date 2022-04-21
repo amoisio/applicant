@@ -1,4 +1,4 @@
-import ViewTitle from '../shared/ViewTitle';
+
 import TemplateQuestion from './TemplateQuestion';
 import NewTemplateQuestion from './NewTemplateQuestion';
 
@@ -68,10 +68,10 @@ export default function TemplateEditor(props) {
   });
 
   return (
-    <div id='template-editor'>
-      <ViewTitle>Add and edit template questions</ViewTitle>
+    <div className='template-editor'>
+      
       <NewTemplateQuestion onAdd={onAdd} />
-      <div id='template-questions'>{questions}</div>
+      <div className='template-questions'>{questions}</div>
     </div>
   );
 }
