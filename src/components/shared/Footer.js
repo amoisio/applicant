@@ -1,4 +1,6 @@
-import Button from './Button';
+import NavLink from './NavLink';
+import Icon from './Icon';
+import './Footer.css';
 
 /**
  * Footer component
@@ -8,7 +10,19 @@ import Button from './Button';
 export default function Footer(props) {
   return (
     <footer>
-      <Button onClick={props.onClick}>Menu</Button>
+      <div className='copyright'>
+        <span>&copy; 2022 Aleksi Moisio</span>
+      </div>
+      <div className='links'>
+        <NavLink onClick={props.onOpenTemplate}>
+          <Icon icon='chevron-left' />
+          Template
+        </NavLink>
+        <NavLink onClick={props.onOpenArchive}>
+          <Icon icon='chevron-left' />
+          Archive
+        </NavLink>
+      </div>
     </footer>
   );
 }

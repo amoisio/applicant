@@ -1,0 +1,33 @@
+.auto-grow {
+  display: inline-grid;
+  width: 100%;
+  vertical-align: middle;
+  align-items: center;
+  position: relative;
+
+  align-items: stretch;
+}
+
+.auto-grow::after,
+.auto-grow textarea {
+  width: auto;
+  font: inherit;
+  padding: 0.7rem;
+  margin: 0;
+  resize: none;
+  background: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+
+  grid-area: 1/1;
+  background-color: white;
+}
+
+.auto-grow::after {
+  content: attr(data-value) '';
+  font-size: 1;
+  visibility: hidden;
+  white-space: pre-wrap;
+}

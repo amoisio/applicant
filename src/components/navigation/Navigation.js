@@ -1,4 +1,9 @@
+import React from 'react';
+import './Navigation.css';
 import Button from '../shared/Button';
+import Icon from '../shared/Icon';
+import NavLink from '../shared/NavLink';
+import InputText from '../shared/InputText';
 
 /**
  * Landing page navigation component.
@@ -8,16 +13,51 @@ import Button from '../shared/Button';
  * @param {function} onOpenTemplate onOpenTemplate() callback called when clicking on the 'Template' button.
  * @param {function} onOpenArchive onOpenArchive() callback called when clicking on the 'Archive' button.
  */
-export default function Navigation(props) {
-  const questionnaires = props.openQuestionnaires.map(q => {
-    return <Button onClick={() => props.onOpenQuestionnaire(q.id)}>{q.title}</Button>
-  });
-  return (
-    <div className='navigation'>
-      {questionnaires}
-      <Button onClick={() => props.onCreateQuestionnaire('New')}>New</Button>
-      <Button onClick={props.onOpenTemplate}>Template</Button>
-      <Button onClick={props.onOpenArchive}>Archive</Button>
-    </div>
-  );
+export default class Navigation extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      questionnaireTitle: ''
+    };
+    this.onChange = this.onChange.bind(this);
+  }
+
+  onChange(title) {
+    this.setState({
+      questionnaireTitle: title
+    });
+  }
+
+  render() {
+    const questionnaires = this.props.openQuestionnaires.map((q) => {
+      return (
+        <NavLink 
+          key={q.id}  
+          onClick={() => this.props.onOpenQuestionnaire(q)}>
+          {q.title}
+          <Icon icon='chevron-right'/>
+        </NavLink>
+      );
+    });
+    return (
+      <main className='navigation'>
+        <div className='new-questionnaire'>
+          <InputText
+            placeholder='New questionnaire title...'
+            onChange={this.onChange}
+            value={this.state.questionnaireTitle}
+          />
+          <Button
+            onClick={() =>
+              this.props.onCreateQuestionnaire(this.state.questionnaireTitle)
+            }
+            className='action-button'
+          >
+            <Icon icon='plus-lg' />
+          </Button>
+        </div>
+        {questionnaires}
+      </main>
+    );
+  }
 }

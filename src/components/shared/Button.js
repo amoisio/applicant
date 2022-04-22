@@ -5,7 +5,7 @@
  */
 export default function Button(props) {
   return (
-    <button onClick={props.onClick}>
+    <button onClick={props.onClick} className={props.className} tabIndex="0">
       {props.children}
     </button>
   )

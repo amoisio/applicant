@@ -2,18 +2,24 @@ import ls from 'local-storage';
 
 const key = 'applicant.template'; 
 
-function get() {
+function getTemplate() {
   return ls(key);
 }
 
-function addOrUpdate(template) {
+function hasTemplate() {
+  const template = getTemplate();
+  return !!template;
+}
+
+function addOrUpdateTemplate(template) {
   ls(key, template);
   return template;
 }
 
 const api = {
-  get: get,
-  addOrUpdate: addOrUpdate,
+  getTemplate: getTemplate,
+  hasTemplate: hasTemplate,
+  addOrUpdateTemplate: addOrUpdateTemplate,
 };
 
 export default api;

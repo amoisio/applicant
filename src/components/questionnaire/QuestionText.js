@@ -8,7 +8,5 @@ export default function QuestionText(props) {
   if (!question) {
     throw new Error('Non-empty question must be given.');
   }
-  return (
-    <p>{question}</p>
-  );
+  return <p>{question}</p>;
 }

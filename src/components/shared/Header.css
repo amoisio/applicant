@@ -1,0 +1,32 @@
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  width: 576px;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+header .application-title {
+  display: flex;
+  flex-grow: 1;
+  font-size: 3rem;
+  font-family: Tahoma, sans-serif;
+  font-variant: small-caps;
+  font-weight: 700;
+}
+
+header .nav-link a {
+  font-variant: small-caps;
+  letter-spacing: 0.5rem;
+  border-right: 1rem solid #dca8bc;
+  text-decoration: none;
+}
+  
+header .nav-link a:active:focus,
+header .nav-link a:hover {
+  color:#e2075b;
+  border-right: 1rem solid #e2075b;
+}

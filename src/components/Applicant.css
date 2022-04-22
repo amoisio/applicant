@@ -1,53 +1,43 @@
-
-#root { /* Top-most flex container */
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  height: 100vh;
-}
-
 .applicant {
   display: flex;
   flex-direction: column;
-  flex-basis: 100%;
-  padding: 0.5rem;
-  margin: 0.5rem;
-  border-radius: 10px;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #eef5fa;
+  margin: 0;
+  padding: 0;
 }
 
-header {
-  display: flex;
-  align-self: center;
-}
-
-main {
-  display: flex;
-  flex-direction: column;
-  align-self: center;
-  flex-grow: 1;
-}
-
-main div.navigation {
-  display: flex;
-  flex-direction: column;
-}
-
-
-footer {
+.applicant-header {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
+  max-height: fit-content;
+  color: #1d3557;
+  width: 100%;
 }
 
-.footerMenu {
+.applicant-content {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  color: #1d3557;
+  width: 100%;
 }
 
-@media screen and (min-width: 576px) {
-  .applicant {
-    flex-basis: 576px;
-    border: 1px solid black;
-  }
+.applicant-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: #1d3557;
+  color: white;
+  width: 100%;
+  min-height: 200px;
 }
+
+a {
+  color: #1d3557;
+}
+

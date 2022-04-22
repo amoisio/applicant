@@ -1,0 +1,71 @@
+.template {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  color: #1d3557;
+  width: 576px;
+}
+
+.template-questions {
+  display: flex;
+  flex-direction: column;
+}
+
+.template-question {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1rem;
+  box-shadow: 6px 6px 0px 0px #457b9d;
+  border: 2px solid #1d3557;
+}
+
+.template-question .icon {
+  font-size: x-large;
+  padding: 0.125rem 0 0.125rem 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Action buttons */
+.template-question .action-button {
+  background-color: #a4c3b2;
+  color: #f6fff8;
+  border: 0;
+  box-shadow: none;
+}
+
+.template-question .action-button {
+  background-color: #e4cece;
+  color: #d94141;
+}
+
+.template-question .action-button:active:focus,
+.template-question .action-button:hover {
+  background-color: #e13131;
+  color: #e4cece;
+}
+
+.new-template-question .action-button {
+  background-color: #d1f6cc;
+  color: #3ac265;
+}
+
+.new-template-question .action-button:active:focus,
+.new-template-question .action-button:hover {
+  background-color: #3ac265;
+  color: #d1f6cc;
+}
+
+/* Focusable item highlights */
+textarea:focus,
+button:focus,
+button:hover,
+.action-button:hover,
+.auto-grow > textarea:hover {
+  outline: none !important;
+  box-shadow: 0 0 10px 2px black;
+}
+
+
