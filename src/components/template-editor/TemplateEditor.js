@@ -69,9 +69,8 @@ export default function TemplateEditor(props) {
 
   return (
     <div className='template-editor'>
-      
       <NewTemplateQuestion onAdd={onAdd} />
-      <div className='template-questions'>{questions}</div>
+      {questions}
     </div>
   );
 }

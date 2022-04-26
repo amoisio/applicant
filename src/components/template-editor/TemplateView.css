@@ -8,7 +8,7 @@
   width: 576px;
 }
 
-.template-questions {
+.template-editor {
   display: flex;
   flex-direction: column;
 }
