@@ -41,3 +41,16 @@ a {
   color: #1d3557;
 }
 
+/* Focusable item highlights */
+input:focus,
+input:hover,
+textarea:focus,
+textarea:hover,
+button:focus,
+button:hover,
+.action-button:focus,
+.action-button:hover {
+  outline: none !important;
+  box-shadow: 0 0 10px 2px black;
+}
+

@@ -1,5 +1,6 @@
 import { trimmedOrDefault } from '../../models/common';
 import QuestionText from './QuestionText';
+import AutoGrowTextarea from '../shared/AutoGrowTextarea';
 /**
  * Questionnaire question with an answer component for answering a questionnaire question.
  * @param {string} question Question text.
@@ -16,14 +17,27 @@ export default function QuestionWithAnswer(props) {
     throw new Error('Non-empty question must be given.');
   }
   const answer = props.answer;
+
+  const checkmark =
+    answer && answer.length > 0 ? (
+      <div className='checkmark answered'>
+        <span className='bi-check'></span>
+      </div>
+    ) : (
+      <div className='checkmark'>
+        <span className='bi-x'></span>
+      </div>
+    );
+
   return (
     <div className='questionnaire-question'>
       <QuestionText question={question}></QuestionText>
-      <input
-        type='text'
+      <AutoGrowTextarea
+        placeholder='Enter answer text...'
+        onChange={onChange}
         value={answer}
-        onChange={(e) => onChange(e.target.value)}
       />
+      {checkmark}
     </div>
   );
 }

@@ -28,7 +28,7 @@ footer .links .nav-link a {
   text-decoration: none;
 }
   
-footer .links .nav-link a:active:focus,
+footer .links .nav-link a:focus,
 footer .links .nav-link a:hover {
   color:#e1779f;
   border-right: 1rem solid #e2075b;

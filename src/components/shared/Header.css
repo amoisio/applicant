@@ -25,7 +25,7 @@ header .nav-link a {
   text-decoration: none;
 }
   
-header .nav-link a:active:focus,
+header .nav-link a:focus,
 header .nav-link a:hover {
   color:#e2075b;
   border-right: 1rem solid #e2075b;

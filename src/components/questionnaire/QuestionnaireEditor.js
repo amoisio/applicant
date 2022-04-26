@@ -1,5 +1,4 @@
 import QuestionWithAnswer from './QuestionWithAnswer';
-import ViewTitle from '../shared/ViewTitle';
 import Button from '../shared/Button';
 
 /**
@@ -21,9 +20,8 @@ export default function QuestionnaireEditor(props) {
   if (!onComplete) {
     throw new Error(`onComplete callback not given.`);
   }
-  const title = questionnaire.title;
   const questions = questionnaire.questions;
-  const elements = questions.map((question) => {
+  const answers = questions.map((question) => {
     return (
       <QuestionWithAnswer
         key={question.id}
@@ -36,9 +34,8 @@ export default function QuestionnaireEditor(props) {
     );
   });
   return (
-    <div id='questionnaire'>
-      <ViewTitle>{title}</ViewTitle>
-      {elements}
+    <div className='questionnaire-editor'>
+      {answers}
       <Button onClick={onComplete}>Complete</Button>
     </div>
   );

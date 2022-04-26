@@ -1,0 +1,72 @@
+.questionnaire {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  color: #1d3557;
+  width: 576px;
+}
+
+.questionnaire-editor {
+  display: flex;
+  flex-direction: column;
+}
+
+.questionnaire-question {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  box-shadow: 6px 6px 0px 0px #457b9d;
+  border: 2px solid #1d3557;
+}
+
+.questionnaire-question p {
+  margin:0.7rem;
+  text-indent: 0.5rem;
+  line-height: 1.5rem;
+}
+
+.checkmark {
+  position:absolute;
+  top: 0.6rem;
+  left: -0.9rem;
+  padding: 0rem 0.2rem;
+  border-radius: 0px;
+  border: 2px solid #1d3557;
+  background-color: #e4cece;
+  color: #d94141;
+  font-weight: 800;
+}
+
+.checkmark.answered {
+  background-color: #3ac265;
+  color: white;
+}
+
+.questionnaire-question .icon {
+  font-size: x-large;
+  padding: 0.125rem 0 0.125rem 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Action buttons */
+.questionnaire-question .action-button {
+  background-color: #a4c3b2;
+  color: #f6fff8;
+  border: 0;
+  box-shadow: none;
+}
+
+.questionnaire-question .action-button {
+  background-color: #e4cece;
+  color: #d94141;
+}
+
+.questionnaire-question .action-button:active:focus,
+.questionnaire-question .action-button:hover {
+  background-color: #e13131;
+  color: #e4cece;
+}

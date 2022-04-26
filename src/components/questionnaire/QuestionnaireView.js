@@ -1,7 +1,8 @@
 import React from 'react';
 import Questionnaire from '../../models/questionnaire';
 import QuestionnaireEditor from './QuestionnaireEditor';
-
+import ViewTitle from '../shared/ViewTitle';
+import './QuestionnaireView.css';
 /**
  * Template view component manages template state.
  * @param {object} questionnaire Questionnaire.
@@ -31,19 +32,18 @@ export default class QuestionnaireView extends React.Component {
     return this.props.questionnaireRepository;
   }
 
-  get questionnaire() {
-    return this.props.questionnaire;
-  }
-
   render() {
     console.log('Rendering questionnaire');
     const questionnaire = this.state.questionnaire;
     return (
-      <QuestionnaireEditor
-        questionnaire={questionnaire}
-        onAnswer={this.updateAnswer}
-        onComplete={this.completeQuestionnaire}
-      />
+      <main className='questionnaire'>
+        <ViewTitle>{questionnaire.title}</ViewTitle>
+        <QuestionnaireEditor
+          questionnaire={questionnaire}
+          onAnswer={this.updateAnswer}
+          onComplete={this.completeQuestionnaire}
+        />
+      </main>
     );
   }
 
