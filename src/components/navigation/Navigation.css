@@ -22,7 +22,13 @@
   border: 0;
   padding-left: 1rem;
   padding-right: 1rem;
-  z-index: 0;
+  z-index: 1;
+}
+
+.navigation .new-questionnaire input:focus,
+.navigation .new-questionnaire input:hover {
+  outline: none !important;
+  box-shadow: 0 0 10px 2px black;
 }
 
 .navigation .new-questionnaire .icon {
@@ -44,11 +50,15 @@
   background-color: #3ac265;
   color: #d1f6cc;
   cursor: pointer;
+  outline: none !important;
+  box-shadow: 0 0 10px 2px black;
 }
 
-.navigation .nav-link {
+.navigation .nav-link-with-count .nav-link,
+.navigation .nav-link-with-count .count {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+  line-height: 1.5rem;
 }
 
 .navigation .nav-link a {
@@ -58,6 +68,7 @@
   font-weight: bolder;
   font-size: larger;
   letter-spacing: 0.5rem;
+  color: #1d3557;
   border-left: 1rem solid #dca8bc;
   text-decoration: none;
 }
@@ -66,4 +77,10 @@
 .navigation .nav-link a:hover {
   color:#e2075b;
   border-left: 1rem solid #e2075b;
+}
+
+.navigation .nav-link-with-count {
+  display: flex;
+  direction: row;
+  justify-content: space-between;
 }

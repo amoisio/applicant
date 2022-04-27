@@ -20,9 +20,12 @@ header .application-title {
 
 header .nav-link a {
   font-variant: small-caps;
-  letter-spacing: 0.5rem;
+  font-size: smaller;
+  letter-spacing: 0.25rem;
+  padding-right: 0.25rem;
   border-right: 1rem solid #dca8bc;
   text-decoration: none;
+  color: #1d3557;
 }
   
 header .nav-link a:focus,

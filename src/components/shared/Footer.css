@@ -16,16 +16,18 @@ footer .links {
 }
 
 footer .links .nav-link {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 footer .links .nav-link a {
   font-variant: small-caps;
+  font-size:smaller;
   justify-self: flex-end;
-  letter-spacing: 0.5rem;
+  letter-spacing: 0.25rem;
+  padding-right: 0.25rem;
   border-right: 1rem solid #dca8bc;
-  color: white;
   text-decoration: none;
+  color: white;
 }
   
 footer .links .nav-link a:focus,

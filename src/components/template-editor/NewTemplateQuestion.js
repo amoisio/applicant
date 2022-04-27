@@ -39,7 +39,7 @@ export default class NewTemplateQuestion extends React.Component {
 
   render() {
     return (
-      <div className='template-question new-template-question'>
+      <div className='new-template-question'>
         <AutoGrowTextarea
           placeholder='New question text...'
           onChange={this.handleChange}

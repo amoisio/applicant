@@ -4,7 +4,7 @@ import Button from '../shared/Button';
 import Icon from '../shared/Icon';
 import NavLink from '../shared/NavLink';
 import InputText from '../shared/InputText';
-
+import { trimmedOrDefault } from '../../models/common';
 /**
  * Landing page navigation component.
  * @param {any[]} openQuestionnaires Open questionnaires.
@@ -30,13 +30,18 @@ export default class Navigation extends React.Component {
 
   render() {
     const questionnaires = this.props.openQuestionnaires.map((q) => {
+      var total = q.questions.length;
+      var answered = q.questions.map((q) => trimmedOrDefault(q.answer)).filter(a => a !== null).length;
       return (
-        <NavLink 
-          key={q.id}  
-          onClick={() => this.props.onOpenQuestionnaire(q)}>
-          {q.title}
-          <Icon icon='chevron-right'/>
-        </NavLink>
+        <div className='nav-link-with-count' key={q.id}>
+          <NavLink onClick={() => this.props.onOpenQuestionnaire(q)}>
+            {q.title}
+            <Icon icon='chevron-right' />
+          </NavLink>
+          <span className='count'>
+            {answered} / {total}
+          </span>
+        </div>
       );
     });
     return (
