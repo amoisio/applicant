@@ -2,7 +2,10 @@ import React from 'react';
 import Questionnaire from '../../models/questionnaire';
 import QuestionnaireEditor from './QuestionnaireEditor';
 import ViewTitle from '../shared/ViewTitle';
+import Button from '../shared/Button';
+import Icon from '../shared/Icon';
 import './QuestionnaireView.css';
+
 /**
  * Template view component manages template state.
  * @param {object} questionnaire Questionnaire.
@@ -41,8 +44,10 @@ export default class QuestionnaireView extends React.Component {
         <QuestionnaireEditor
           questionnaire={questionnaire}
           onAnswer={this.updateAnswer}
-          onComplete={this.completeQuestionnaire}
         />
+        <Button onClick={this.completeQuestionnaire} className='complete-button'>
+          <Icon icon="check"/>
+        </Button>
       </main>
     );
   }

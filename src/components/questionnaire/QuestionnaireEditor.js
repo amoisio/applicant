@@ -1,5 +1,4 @@
 import QuestionWithAnswer from './QuestionWithAnswer';
-import Button from '../shared/Button';
 
 /**
  * Questionnaire editor component
@@ -15,10 +14,6 @@ export default function QuestionnaireEditor(props) {
   const onAnswer = props.onAnswer;
   if (!onAnswer) {
     throw new Error('onAnswer callback not given.');
-  }
-  const onComplete = props.onComplete;
-  if (!onComplete) {
-    throw new Error(`onComplete callback not given.`);
   }
   const questions = questionnaire.questions;
   const answers = questions.map((question) => {
@@ -36,7 +31,6 @@ export default function QuestionnaireEditor(props) {
   return (
     <div className='questionnaire-editor'>
       {answers}
-      <Button onClick={onComplete}>Complete</Button>
     </div>
   );
 }
