@@ -3,52 +3,43 @@ import Button from '../shared/Button';
 import { trimmedOrDefault } from '../../models/common';
 import Icon from '../shared/Icon';
 import AutoGrowTextarea from '../shared/AutoGrowTextarea';
+import { useState } from 'react';
 
 /**
  * New template question component for adding a question to a template
  * @param {function} onAdd onAdd(text: string) callback function called when clicks 'Add'
  */
-export default class NewTemplateQuestion extends React.Component {
-  constructor(props) {
-    super(props);
-    if (!props.onAdd) {
+export default function NewTemplateQuestion({ onAdd }) {
+  const [ state, setState ] = useState({
+    value: ''
+  });
+
+  if (!onAdd) {
       throw new Error('onAdd callback not defined.');
-    }
-    this.state = {
-      value: '',
-    };
-    this.handleAdd = this.handleAdd.bind(this);
-    this.handleChange = this.handleChange.bind(this);
   }
-
-  get onAdd() {
-    return this.props.onAdd;
-  }
-
-  handleAdd() {
-    const text = trimmedOrDefault(this.state.value);
+  
+  const handleAdd = () => {
+    const text = trimmedOrDefault(state.value);
     if (text) {
-      this.onAdd(text);
+      onAdd(text);
     }
-    this.setState({ value: '' });
+    setState({ value: '' });
   }
 
-  handleChange(modifiedText) {
-    this.setState({ value: modifiedText });
+  const handleChange = (modifiedText) => {
+    setState({ value: modifiedText });
   }
 
-  render() {
-    return (
-      <div className='new-template-question'>
-        <AutoGrowTextarea
-          placeholder='New question text...'
-          onChange={this.handleChange}
-          value={this.state.value}
-        />
-        <Button onClick={this.handleAdd} className='action-button'>
-          <Icon icon='plus-lg' />
-        </Button>
-      </div>
-    );
-  }
+  return (
+    <div className='new-template-question'>
+      <AutoGrowTextarea
+        placeholder='New question text...'
+        onChange={handleChange}
+        value={state.value}
+      />
+      <Button onClick={handleAdd} className='action-button'>
+        <Icon icon='plus-lg' />
+      </Button>
+    </div>
+  );
 }

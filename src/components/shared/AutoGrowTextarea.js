@@ -6,7 +6,7 @@ import './AutoGrowTextarea.css';
  * @param {function} onChange onChange(modifiedText: string) callback called when the input value changes.
  */
 export default function AutoGrowTextarea(props) {
-    return (
+  return (
     <div className='auto-grow' data-value={props.value}>
       <textarea
         rows='1'
