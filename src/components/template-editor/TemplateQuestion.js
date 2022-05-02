@@ -1,33 +1,26 @@
 import Button from '../shared/Button';
-import Icon from '../shared/Icon';
 import AutoGrowTextarea from '../shared/AutoGrowTextarea';
 /**
- * Template question component for editing and signaling the desire to remove a question from a template.
- * @param {string} question Question text
+ * Template question component for editing a question and signaling an action for a template.
+ * @param {string} question Question text.
  * @param {function} onChange onChange(modifiedText: string) callback called when question text changes.
- * @param {function} onRemove onRemove() callback called when user clicks on the 'Remove' button.
-//  * @param {function} onReorder onReorder(e) callback called when TemplateQuestion is being dragged
+ * @param {function} onClick onClick() callback called when user clicks on the button next to the question.
+ * @param {string} className Top-level component class. Defaults to 'template-question'.
+ * @param {string} placeholder Textarea placholder. Default to 'Enter text...'.
+ * @param {*} children Contents of the button. Can be any markup. Defaults to 'Go'.
  */
-export default function TemplateQuestion(props) {
-  const question = props.question;
-  const onChange = props.onChange;
-  if (!onChange) {
-    throw new Error('onChange callback not defined.');
-  }
-  const onRemove = props.onRemove;
-  if (!onRemove) {
-    throw new Error('onRemove callback not defined.');
-  }
-
+export default function TemplateQuestion({ question, onChange, onClick, className, placeholder, children }) {
+  if (!onChange) throw new Error('onChange callback not defined.');
+  if (!onClick) throw new Error('onClick callback not defined.');
   return (
-    <div className='template-question'>
+    <div className={className ?? 'template-question'}>
       <AutoGrowTextarea
-        placeholder='Enter question text...'
+        placeholder={placeholder ?? 'Enter text...'}
         onChange={onChange}
         value={question}
       />
-      <Button onClick={onRemove} className='action-button'>
-        <Icon icon='x-lg' />
+      <Button onClick={onClick} className='action-button'>
+        {children ?? 'Go'}
       </Button>
     </div>
   );

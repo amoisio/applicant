@@ -1,7 +1,6 @@
-
 import TemplateQuestion from './TemplateQuestion';
-import NewTemplateQuestion from './NewTemplateQuestion';
-
+import { useState } from 'react';
+import Icon from '../shared/Icon';
 
 /**
  * Template editor component
@@ -11,27 +10,14 @@ import NewTemplateQuestion from './NewTemplateQuestion';
  * @param {function} onRemove onRemove(id: string) callback function called when removing a question.
  * @param {function} onReorder onReorder(draggedId: string, droppedId: string) callback function called when dragging and dropping questions around.
  */
-export default function TemplateEditor(props) {
-  const template = props.template;
-  if (!template) {
-    throw new Error('Template must be given.');
-  }
-  const onAdd = props.onAdd;
-  if (!onAdd) {
-    throw new Error('onAdd callback not defined.');
-  }
-  const onChange = props.onChange;
-  if (!onChange) {
-    throw new Error('onChange callback not defined.');
-  }
-  const onRemove = props.onRemove;
-  if (!onRemove) {
-    throw new Error('onRemove callback not defined.');
-  }
-  const onReorder = props.onReorder;
-  if (!onReorder) {
-    throw new Error('onReorder callback not defined.');
-  }
+export default function TemplateEditor({ template, onAdd, onChange, onRemove, onReorder }) {
+  const [newQuestion, setNewQuestion] = useState('');
+
+  if (!template)  throw new Error('Template must be given.');
+  if (!onAdd)     throw new Error('onAdd callback not defined.');
+  if (!onChange)  throw new Error('onChange callback not defined.');
+  if (!onRemove)  throw new Error('onRemove callback not defined.');
+  if (!onReorder) throw new Error('onReorder callback not defined.');
 
   const onDragStart = (event, draggedId) => {
     event.dataTransfer.effectAllowed = 'move';
@@ -47,6 +33,11 @@ export default function TemplateEditor(props) {
     event.preventDefault();
     event.dataTransfer.dropEffect = 'move';
   };
+  const handleAdd = () => {
+    const text = newQuestion;
+    setNewQuestion('');
+    onAdd(text);
+  }
 
   const questions = template.questions.map((question, index) => {
     return (
@@ -55,21 +46,28 @@ export default function TemplateEditor(props) {
         onDragStart={(e) => onDragStart(e, question.id)}
         onDrop={(e) => onDrop(e, index)}
         onDragOver={onDragOver}
-        draggable='true'
-      >
+        draggable='true'>
         <TemplateQuestion
           question={question.text}
           onChange={(modifiedText) => onChange(question.id, modifiedText)}
-          onRemove={() => onRemove(question.id)}
-          orderNumber={index + 1}
-        />
+          onClick={() => onRemove(question.id)}
+          placeholder='Enter question...'>
+          <Icon icon='x-lg' />
+        </TemplateQuestion>
       </div>
     );
   });
 
   return (
     <div className='template-editor'>
-      <NewTemplateQuestion onAdd={onAdd} />
+      <TemplateQuestion
+        question={newQuestion}
+        onChange={(modifiedText) => setNewQuestion(modifiedText)}
+        onClick={handleAdd}
+        className='new-template-question'
+        placeholder='Enter new question...'>
+        <Icon icon='plus-lg' />
+      </TemplateQuestion>
       {questions}
     </div>
   );
