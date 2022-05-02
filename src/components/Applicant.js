@@ -1,12 +1,11 @@
 import React from 'react';
 import './Applicant.css';
-import Navigation from './navigation/Navigation';
+import NavigationView from './navigation/NavigationView';
 import navigationKeys from './navigation/navigation-keys';
 import Footer from './shared/Footer';
 import Header from './shared/Header';
 import Archive from './archive/Archive';
 import Questionnaire from '../models/questionnaire';
-import Template from '../models/template';
 import TemplateView from './template-editor/TemplateView';
 import QuestionnaireView from './questionnaire/QuestionnaireView';
 
@@ -92,15 +91,10 @@ export default class Applicant extends React.Component {
 
   renderTemplate() {
     console.log('Rendering template');
-    const hasTemplate = this.templateRepository.hasTemplate();
-    const template = hasTemplate
-      ? this.templateRepository.getTemplate()
-      : Template.create();
     return (
       <TemplateView
-        template={template}
-        templateRepository={this.templateRepository}
-      />
+        title='Template questions'
+        templateRepository={this.templateRepository} />
     );
   }
 
@@ -121,7 +115,7 @@ export default class Applicant extends React.Component {
     const repository = this.questionnaireRepository;
     const openQuestionnaires = repository.getActive();
     return (
-      <Navigation
+      <NavigationView
         onOpenQuestionnaire={this.openQuestionnaire}
         onCreateQuestionnaire={this.createQuestionnaire}
         onOpenTemplate={this.openTemplate}
