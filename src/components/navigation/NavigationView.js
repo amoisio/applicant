@@ -13,7 +13,7 @@ import { trimmedOrDefault } from '../../models/common';
  * @param {function} onOpenTemplate onOpenTemplate() callback called when clicking on the 'Template' button.
  * @param {function} onOpenArchive onOpenArchive() callback called when clicking on the 'Archive' button.
  */
-export default class Navigation extends React.Component {
+export default class NavigationView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
