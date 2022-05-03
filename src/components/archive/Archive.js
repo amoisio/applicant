@@ -1,8 +1,5 @@
 import React from 'react';
 
-export default class Archive extends React.Component {
-
-  render() {
-    return <p>Archive list comes here!</p>
-  }
+export default function Archive(props) {
+  return <p>Archive list comes here!</p>;
 }
