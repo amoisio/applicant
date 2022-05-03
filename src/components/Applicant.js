@@ -117,11 +117,9 @@ export default class Applicant extends React.Component {
     const openQuestionnaires = repository.getActive();
     return (
       <NavigationView
+        questionnaires={openQuestionnaires}
         onOpenQuestionnaire={this.openQuestionnaire}
         onCreateQuestionnaire={this.createQuestionnaire}
-        onOpenTemplate={this.openTemplate}
-        onOpenArchive={this.openArchive}
-        openQuestionnaires={openQuestionnaires}
       />
     );
   }
