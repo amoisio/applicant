@@ -1,36 +1,41 @@
 import QuestionWithAnswer from './QuestionWithAnswer';
+import Button from '../shared/Button';
+import Icon from '../shared/Icon';
+import Questionnaire from '../../models/questionnaire';
 
 /**
  * Questionnaire editor component
  * @param {object} questionnaire Questionnaire.
- * @param {function} onAnswer onAnswer(id: string, modifiedAnswer: string) callback function called when changing answer text.
- * @param {function} onComplete onComplete(id: string) callback function called when completing the questionnaire.
+ * @param {function} onChange onChange(questionnaire: object) callback function called when questionnaire changes.
  */
-export default function QuestionnaireEditor(props) {
-  const questionnaire = props.questionnaire;
-  if (!questionnaire) {
-    throw new Error('Questionnaire must be given.');
+export default function QuestionnaireEditor({ questionnaire, onChange }) {
+  if (!questionnaire) throw new Error('Questionnaire must be given.');
+  if (!onChange)      throw new Error('onChange callback not given.');
+
+  const updateAnswer = (id, modifiedAnswer) => {
+    const modifiedQuestionnaire = Questionnaire.answer(id, modifiedAnswer, questionnaire);
+    onChange(modifiedQuestionnaire);
   }
-  const onAnswer = props.onAnswer;
-  if (!onAnswer) {
-    throw new Error('onAnswer callback not given.');
+  const completeQuestionnaire = () => {
+    const modifiedQuestionnaire = Questionnaire.complete(questionnaire);
+    onChange(modifiedQuestionnaire);
   }
-  const questions = questionnaire.questions;
-  const answers = questions.map((question) => {
+
+  const answers = questionnaire.questions.map((question) => {
     return (
       <QuestionWithAnswer
         key={question.id}
         question={question.text}
         answer={question.answer}
-        onChange={(modifiedAnswer) =>
-          onAnswer(question.id, modifiedAnswer)
-        }
-      />
+        onChange={(modifiedAnswer) => updateAnswer(question.id, modifiedAnswer)} />
     );
   });
   return (
     <div className='questionnaire-editor'>
       {answers}
+      <Button onClick={completeQuestionnaire} className='complete-button'>
+        <Icon icon='check' />
+      </Button>
     </div>
   );
 }

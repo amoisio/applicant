@@ -1,91 +1,46 @@
-import React from 'react';
-import Template from '../../models/template';
+import React, { useEffect, useRef, useState } from 'react';
 import TemplateEditor from './TemplateEditor';
 import ViewTitle from '../shared/ViewTitle';
+import Template from '../../models/template';
 import './TemplateView.css';
 
 /**
  * Template view component manages template state.
- * @param {object} template Template.
+ * @param {string} title Template view title.
  * @param {object} templateRepository Template repository.
  */
-export default class TemplateView extends React.Component {
-  constructor(props) {
-    super(props);
-  
-    const template = props.template;
+export default function TemplateView({ title, templateRepository }) {
+  if (!templateRepository) throw new Error('templateRepository must be given.');
+
+  const [template, setTemplate] = useState(undefined);
+  const initialRender = useRef(true);
+
+  useEffect(() => {
     if (!template) {
-      throw new Error('template must be given.');
+      // Load template into local state
+      const hasTemplate = templateRepository.hasTemplate();
+      const currentTemplate = hasTemplate
+        ? templateRepository.getTemplate()
+        : Template.create();
+      setTemplate(currentTemplate);
+      return;
+    } 
+    
+    if (initialRender.current) {
+      // This prevents a redundant save once the template has been loaded
+      initialRender.current = false;
+    } else {
+      // For subsequent template changes, save the template
+      templateRepository.addOrUpdateTemplate(template);
     }
-    const templateRepository = props.templateRepository;
-    if (!templateRepository) {
-      throw new Error('templateRepository must be given.');
-    }
+  }, [templateRepository, template]);
 
-    this.state = {
-      template: template
-    }
-
-    this.addQuestion = this.addQuestion.bind(this);
-    this.updateQuestion = this.updateQuestion.bind(this);
-    this.removeQuestion = this.removeQuestion.bind(this);
-    this.reorderQuestion = this.reorderQuestion.bind(this);
-  }
-
-  get templateRepository() {
-    return this.props.templateRepository;
-  }
-
-  render() {
-    console.log('Rendering template editor');
-    const template = this.state.template;
-    return (
-      <main className='template'>
-        <ViewTitle>Template questions</ViewTitle>
-        <TemplateEditor
-          template={template}
-          onAdd={this.addQuestion}
-          onChange={this.updateQuestion}
-          onRemove={this.removeQuestion}
-          onReorder={this.reorderQuestion}
-        />
-      </main>
-    );
-  }
-
-  addQuestion(text) {
-    const template = this.state.template;
-    const modifiedTemplate = Template.addQuestion(text, template);
-    this.save(modifiedTemplate);
-  }
-
-  updateQuestion(id, modifiedText) {
-    const template = this.state.template;
-    const modifiedTemplate = Template.changeQuestionText(
-      id,
-      modifiedText,
-      template
-    );
-    this.save(modifiedTemplate);
-  }
-
-  removeQuestion(id) {
-    const template = this.state.template;
-    const modifiedTemplate = Template.removeQuestion(id, template);
-    this.save(modifiedTemplate);
-  }
-
-  reorderQuestion(id, newIndex) {
-    const template = this.state.template;
-    const modifiedTemplate = Template.reorderQuestion(id, newIndex, template);
-    this.save(modifiedTemplate);
-  }
-
-  save(template) {
-    console.log('save template');
-    this.templateRepository.addOrUpdateTemplate(template);
-    this.setState({
-      template: template,
-    });
-  }
+  return (
+    <main className='template'>
+      <ViewTitle>{title ?? 'Template questions'}</ViewTitle>
+      {template && <TemplateEditor
+        template={template}
+        onChange={setTemplate} />}
+    </main>
+  );
 }
