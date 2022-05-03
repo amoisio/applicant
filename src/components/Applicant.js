@@ -1,5 +1,4 @@
-import React from 'react';
-import './Applicant.css';
+import React, { useState } from 'react';
 import NavigationView from './navigation/NavigationView';
 import navigationKeys from './navigation/navigation-keys';
 import Footer from './shared/Footer';
@@ -8,159 +7,103 @@ import Archive from './archive/Archive';
 import Questionnaire from '../models/questionnaire';
 import TemplateView from './template-editor/TemplateView';
 import QuestionnaireView from './questionnaire/QuestionnaireView';
+import './Applicant.css';
 
-export default class Applicant extends React.Component {
-  constructor(props) {
-    super(props);
+export default function Applicant({ title, templateRepository, questionnaireRepository }) {
+  if (!templateRepository) throw new Error('templateRepository must be given.');
+  if (!questionnaireRepository) throw new Error('questionnaireRepository must be given');
 
-    if (!props.templateRepository) {
-      throw new Error('templateRepository must be given.');
-    }
-    if (!props.questionnaireRepository) {
-      throw new Error('questionnaireRepository must be given');
-    }
+  const [renderKey, setRenderKey] = useState(navigationKeys.navigation);
+  const [selectedQuestionnaire, setSelectedQuestionnaire] = useState(null);
 
-    this.state = {
-      renderKey: navigationKeys.navigation,
-      selectedQuestionnaire: null,
-    };
-
-    this.openNavigation = this.openNavigation.bind(this);
-    this.openQuestionnaire = this.openQuestionnaire.bind(this);
-    this.createQuestionnaire = this.createQuestionnaire.bind(this);
-    this.openTemplate = this.openTemplate.bind(this);
-    this.openArchive = this.openArchive.bind(this);
-  }
-
-  get templateRepository() {
-    return this.props.templateRepository;
-  }
-
-  get questionnaireRepository() {
-    return this.props.questionnaireRepository;
-  }
-
-  get applicationTitle() {
-    return this.props.title ?? 'Applicant';
-  }
-
-  render() {
-    const pageTitle = this.applicationTitle;
-    const element = this.renderActiveElement();
-    return (
-      <div className='applicant'>
-        <div className='applicant-header'>
-          <Header onOpenMenu={this.openNavigation}>{pageTitle}</Header>
-        </div>
-        <div className='applicant-content'>{element}</div>
-        <div className='applicant-footer'>
-          <Footer
-            onOpenTemplate={this.openTemplate}
-            onOpenArchive={this.openArchive}
-          />
-        </div>
-      </div>
-    );
-  }
-
-  renderActiveElement() {
-    const key = this.state.renderKey;
+  const renderActiveElement = () => {
+    const key = renderKey;
     console.log(`Rendering ${key} view`);
     switch (key) {
       case navigationKeys.questionnaire:
-        return this.renderQuestionnaire();
+        return renderQuestionnaire(selectedQuestionnaire);
       case navigationKeys.template:
-        return this.renderTemplate();
+        return renderTemplate();
       case navigationKeys.archive:
-        return this.renderArchive();
+        return renderArchive();
       default:
-        return this.renderNavigation();
+        return renderNavigation();
     }
   }
-
-  renderQuestionnaire() {
-    console.log('Rendering questionnaire');
-    const {id, title} = this.state.selectedQuestionnaire;
+  const renderQuestionnaire = ({ id, title }) => {
+    console.log(`Rendering questionnaire ${id} ${title}`);
     return (
       <QuestionnaireView
         title={title}
         questionnaireId={id}
-        questionnaireRepository={this.questionnaireRepository}
-      />
+        questionnaireRepository={questionnaireRepository} />
     );
   }
-
-  renderTemplate() {
+  const renderTemplate = () => {
     console.log('Rendering template');
     return (
       <TemplateView
         title='Template questions'
-        templateRepository={this.templateRepository} />
+        templateRepository={templateRepository} />
     );
   }
-
-  renderArchive() {
+  const renderArchive = () => {
     console.log('Rendering archive');
-    const repository = this.questionnaireRepository;
-    const questionnaires = repository.getCompleted();
-    return (
-      <Archive
-        questionnaires={questionnaires}
-        onOpen={this.openQuestionnaire}
-      />
-    );
+    return <Archive />;
   }
-
-  renderNavigation() {
+  const renderNavigation = () => {
     console.log('Rendering navigation');
-    const repository = this.questionnaireRepository;
+    const repository = questionnaireRepository;
     const openQuestionnaires = repository.getActive();
     return (
       <NavigationView
         questionnaires={openQuestionnaires}
-        onOpenQuestionnaire={this.openQuestionnaire}
-        onCreateQuestionnaire={this.createQuestionnaire}
+        onOpenQuestionnaire={openQuestionnaire}
+        onCreateQuestionnaire={createQuestionnaire}
       />
     );
   }
-
-  openNavigation() {
+  const openNavigation = () => {
     console.log('open navigation');
-    this.setState({
-      renderKey: navigationKeys.navigation,
-      selectedQuestionnaire: null,
-    });
-  }
-
-  openQuestionnaire(questionnaire) {
+    setRenderKey(navigationKeys.navigation);
+    setSelectedQuestionnaire(null);
+  };
+  const openQuestionnaire = (questionnaire) => {
     console.log('open questionnaire');
-    this.setState({
-      renderKey: navigationKeys.questionnaire,
-      selectedQuestionnaire: questionnaire,
-    });
-  }
-
-  createQuestionnaire(title) {
+    setRenderKey(navigationKeys.questionnaire);
+    setSelectedQuestionnaire(questionnaire);
+  };
+  const createQuestionnaire = (title) => {
     console.log('creating questionnaire');
-    const repository = this.templateRepository;
+    const repository = templateRepository;
     const template = repository.getTemplate();
     const newQuestionnaire = Questionnaire.create(template, title);
-    this.openQuestionnaire(newQuestionnaire);
-  }
-
-  openArchive() {
-    console.log('opening archive');
-    this.setState({
-      renderKey: navigationKeys.archive,
-      selectedQuestionnaire: null,
-    });
-  }
-
-  openTemplate() {
+    openQuestionnaire(newQuestionnaire);
+  };
+  const openTemplate = () => {
     console.log('open template');
-    this.setState({
-      renderKey: navigationKeys.template,
-      selectedQuestionnaire: null,
-    });
-  }
+    setRenderKey(navigationKeys.template);
+    setSelectedQuestionnaire(null);
+  };
+  const openArchive = () => {
+    console.log('opening archive');
+    setRenderKey(navigationKeys.archive);
+    setSelectedQuestionnaire(null);
+  };
+  return (
+    <div className='applicant'>
+      <div className='applicant-header'>
+        <Header onOpenMenu={openNavigation}>{title ?? 'Applicant'}</Header>
+      </div>
+      <div className='applicant-content'>
+        {renderActiveElement()}
+      </div>
+      <div className='applicant-footer'>
+        <Footer
+          onOpenTemplate={openTemplate}
+          onOpenArchive={openArchive}
+        />
+      </div>
+    </div>
+  );
 }
