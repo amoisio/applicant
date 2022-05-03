@@ -1,9 +1,9 @@
-export default function NavLink(props) {
-  const href = props.href ?? "#";
-  const onClick = props.onClick ?? (() => console.log('clicked!'));
+import { Link } from 'react-router-dom';
+
+export default function NavLink({ to, children }) {
   return (
     <div className='nav-link'>
-      <a href={href} onClick={onClick}>{props.children}</a>
+      <Link to={to}>{children}</Link>
     </div>
   );
 }

@@ -2,23 +2,18 @@ import NavLink from './NavLink';
 import Icon from './Icon';
 import './Footer.css';
 
-/**
- * Footer component
- * @param {function} onClick onClick(event) callback called when clicking the 'Menu' button.
- * @returns 
- */
-export default function Footer(props) {
+export default function Footer() {
   return (
     <footer>
       <div className='copyright'>
         <span>&copy; 2022 Aleksi Moisio</span>
       </div>
       <div className='links'>
-        <NavLink onClick={props.onOpenTemplate}>
+        <NavLink to='/template'>
           <Icon icon='chevron-left' />
           Template
         </NavLink>
-        <NavLink onClick={props.onOpenArchive}>
+        <NavLink to='/archive'>
           <Icon icon='chevron-left' />
           Archive
         </NavLink>

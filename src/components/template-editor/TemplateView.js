@@ -7,10 +7,10 @@ import './TemplateView.css';
 /**
  * Template view component manages template state.
  * @param {string} title Template view title.
- * @param {object} templateRepository Template repository.
+ * @param {object} repository Template repository.
  */
-export default function TemplateView({ title, templateRepository }) {
-  if (!templateRepository) throw new Error('templateRepository must be given.');
+export default function TemplateView({ title, repository }) {
+  if (!repository) throw new Error('repository must be given.');
 
   const [template, setTemplate] = useState(undefined);
   const initialRender = useRef(true);
@@ -18,9 +18,9 @@ export default function TemplateView({ title, templateRepository }) {
   useEffect(() => {
     if (!template) {
       // Load template into local state
-      const hasTemplate = templateRepository.hasTemplate();
+      const hasTemplate = repository.hasTemplate();
       const currentTemplate = hasTemplate
-        ? templateRepository.getTemplate()
+        ? repository.getTemplate()
         : Template.create();
       setTemplate(currentTemplate);
       return;
@@ -31,9 +31,9 @@ export default function TemplateView({ title, templateRepository }) {
       initialRender.current = false;
     } else {
       // For subsequent template changes, save the template
-      templateRepository.addOrUpdateTemplate(template);
+      repository.addOrUpdateTemplate(template);
     }
-  }, [templateRepository, template]);
+  }, [repository, template]);
 
   return (
     <main className='template'>
