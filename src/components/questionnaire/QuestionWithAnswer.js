@@ -1,4 +1,3 @@
-import { trimmedOrDefault } from '../../models/common';
 import AutoGrowTextarea from '../shared/AutoGrowTextarea';
 
 /**
@@ -8,9 +7,7 @@ import AutoGrowTextarea from '../shared/AutoGrowTextarea';
  * @param {function} onChange onChange(modifiedAnswer: string) callback called when answer text changes.
  */
 export default function QuestionWithAnswer({ question, answer, onChange }) {
-  const questionText = trimmedOrDefault(question);
-  if (!questionText)  throw new Error('Non-empty question must be given.');
-  if (!onChange)      throw new Error('onChange callback not defined.');
+  if (!onChange) throw new Error('onChange callback not defined.');
 
   const checkmark =
     answer && answer.length > 0 ? (
@@ -25,7 +22,7 @@ export default function QuestionWithAnswer({ question, answer, onChange }) {
 
   return (
     <div className='questionnaire-question'>
-      <p>{questionText}</p>
+      <p>{question}</p>
       <AutoGrowTextarea
         placeholder='Enter answer text...'
         onChange={onChange}

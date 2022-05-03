@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import TemplateEditor from './TemplateEditor';
 import ViewTitle from '../shared/ViewTitle';
-import './TemplateView.css';
 import Template from '../../models/template';
+import './TemplateView.css';
 
 /**
  * Template view component manages template state.
@@ -23,7 +23,10 @@ export default function TemplateView({ title, templateRepository }) {
         ? templateRepository.getTemplate()
         : Template.create();
       setTemplate(currentTemplate);
-    } else if (initialRender.current) {
+      return;
+    } 
+    
+    if (initialRender.current) {
       // This prevents a redundant save once the template has been loaded
       initialRender.current = false;
     } else {

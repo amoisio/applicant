@@ -1,77 +1,55 @@
-import React from 'react';
-import Questionnaire from '../../models/questionnaire';
+import React, { useEffect, useRef, useState } from 'react';
 import QuestionnaireEditor from './QuestionnaireEditor';
 import ViewTitle from '../shared/ViewTitle';
-import Button from '../shared/Button';
-import Icon from '../shared/Icon';
 import './QuestionnaireView.css';
 
 /**
  * Template view component manages template state.
- * @param {object} questionnaire Questionnaire.
+ * @param {string} title Questionnaire title.
+ * @param {string} questionnaireId Questionnaire id.
  * @param {object} questionnaireRepository Questionnaire repository.
  */
-export default class QuestionnaireView extends React.Component {
-  constructor(props) {
-    super(props);
+export default function QuestionnaireView({
+  title,
+  questionnaireId,
+  questionnaireRepository,
+}) {
+  if (!title) throw new Error('title must be given.');
+  if (!questionnaireRepository)
+    throw new Error('questionnaireRepository must be given.');
+  if (!questionnaireId) throw new Error('id must be given.');
 
-    const questionnaire = props.questionnaire;
-    if (!questionnaire) {
-      throw new Error('questionnaire must be given.');
+  const [questionnaire, setQuestionnaire] = useState(undefined);
+  const initialRender = useRef(true);
+
+  useEffect(() => {
+    console.log(`effect - questionnaireid ${questionnaireId}`);
+    const currentQuestionnaire =
+      questionnaireRepository.getById(questionnaireId);
+    setQuestionnaire(currentQuestionnaire);
+  }, [questionnaireRepository, questionnaireId]);
+
+  useEffect(() => {
+    console.log(`effect - questionnaire ${questionnaire}`);
+    if (!questionnaire) return;
+    if (initialRender.current) {
+      // This prevents a redundant save once the questionnaire has been loaded
+      initialRender.current = false;
+    } else {
+      // For subsequent changes, save the questionnaire
+      questionnaireRepository.addOrUpdate(questionnaire);
     }
-    const questionnaireRepository = props.questionnaireRepository;
-    if (!questionnaireRepository) {
-      throw new Error('questionnaireRepository must be given');
-    }
-    this.state = {
-      questionnaire: questionnaire,
-    };
+  }, [questionnaireRepository, questionnaire]);
 
-    this.updateAnswer = this.updateAnswer.bind(this);
-    this.completeQuestionnaire = this.completeQuestionnaire.bind(this);
-  }
-
-  get questionnaireRepository() {
-    return this.props.questionnaireRepository;
-  }
-
-  render() {
-    console.log('Rendering questionnaire');
-    const questionnaire = this.state.questionnaire;
-    return (
-      <main className='questionnaire'>
-        <ViewTitle>{questionnaire.title}</ViewTitle>
+  return (
+    <main className='questionnaire'>
+      <ViewTitle>{title}</ViewTitle>
+      {questionnaire && (
         <QuestionnaireEditor
           questionnaire={questionnaire}
-          onAnswer={this.updateAnswer}
+          onChange={setQuestionnaire}
         />
-        <Button onClick={this.completeQuestionnaire} className='complete-button'>
-          <Icon icon="check"/>
-        </Button>
-      </main>
-    );
-  }
-
-  updateAnswer(id, modifiedAnswer) {
-    const questionnaire = this.state.questionnaire;
-    const modifiedQuestionnaire = Questionnaire.answer(
-      id,
-      modifiedAnswer,
-      questionnaire
-    );
-    this.save(modifiedQuestionnaire);
-  }
-
-  completeQuestionnaire() {
-    const questionnaire = this.state.questionnaire;
-    const modifiedQuestionnaire = Questionnaire.complete(questionnaire);
-    this.save(modifiedQuestionnaire);
-  }
-
-  save(questionnaire) {
-    this.questionnaireRepository.addOrUpdate(questionnaire);
-    this.setState({
-      questionnaire: questionnaire,
-    });
-  }
+      )}
+    </main>
+  );
 }

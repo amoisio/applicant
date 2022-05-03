@@ -80,10 +80,11 @@ export default class Applicant extends React.Component {
 
   renderQuestionnaire() {
     console.log('Rendering questionnaire');
-    console.log(this.questionnaireRepository);
+    const {id, title} = this.state.selectedQuestionnaire;
     return (
       <QuestionnaireView
-        questionnaire={this.state.selectedQuestionnaire}
+        title={title}
+        questionnaireId={id}
         questionnaireRepository={this.questionnaireRepository}
       />
     );

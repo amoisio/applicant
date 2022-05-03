@@ -9,10 +9,10 @@ import Icon from '../shared/Icon';
  * @param {function} onChange onChange(template: object) callback function called when template changes.
  */
 export default function TemplateEditor({ template, onChange }) {
-  const [newQuestion, setNewQuestion] = useState('');
-
   if (!template) throw new Error('Template must be given.');
   if (!onChange) throw new Error('onChange callback must be given.');
+
+  const [newQuestion, setNewQuestion] = useState('');
 
   const addQuestion = () => {
     const text = newQuestion;
