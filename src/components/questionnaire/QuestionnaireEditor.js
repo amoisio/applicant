@@ -17,7 +17,6 @@ export default function QuestionnaireEditor({ questionnaire, onChange }) {
     onChange(modifiedQuestionnaire);
   }
   const completeQuestionnaire = () => {
-    const questionnaire = this.state.questionnaire;
     const modifiedQuestionnaire = Questionnaire.complete(questionnaire);
     onChange(modifiedQuestionnaire);
   }

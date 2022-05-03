@@ -75,9 +75,9 @@ export default function Applicant({ title, templateRepository, questionnaireRepo
   };
   const createQuestionnaire = (title) => {
     console.log('creating questionnaire');
-    const repository = templateRepository;
-    const template = repository.getTemplate();
+    const template = templateRepository.getTemplate();
     const newQuestionnaire = Questionnaire.create(template, title);
+    questionnaireRepository.addOrUpdate(newQuestionnaire);
     openQuestionnaire(newQuestionnaire);
   };
   const openTemplate = () => {
