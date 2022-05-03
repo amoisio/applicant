@@ -1,17 +1,20 @@
+// @flow
+
 import ls from 'local-storage';
+import type { Template } from '../models/template';
 
 const key = 'applicant.template'; 
 
-function getTemplate() {
+function getTemplate(): Template {
   return ls(key);
 }
 
-function hasTemplate() {
+function hasTemplate(): boolean {
   const template = getTemplate();
   return !!template;
 }
 
-function addOrUpdateTemplate(template) {
+function addOrUpdateTemplate(template: Template): Template {
   ls(key, template);
   return template;
 }
