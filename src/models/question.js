@@ -1,5 +1,17 @@
+// @flow
+
 import { v4 as uuid } from 'uuid';
 import { trimmedOrDefault } from './common';
+
+/**
+ * Question type.
+ */
+export type Question = {|
+  id: string,
+  text: string,
+  answer: ?string,
+  isAnswered: boolean,
+|};
 
 /**
  * Create a question.
@@ -8,7 +20,7 @@ import { trimmedOrDefault } from './common';
  * @param {string} answer Answer text.
  * @returns An immutable question.
  */
-function create(text, id, answer) {
+function create(text: ?string, id: string, answer: ?string): Question {
   const trimmedText = trimmedOrDefault(text);
   if (!trimmedText) {
     throw new Error('Question text must be given.');
@@ -29,7 +41,7 @@ function create(text, id, answer) {
  * @param {object} question Question structure.
  * @returns An immutable question with the answer text.
  */
-function answer(answer, question) {
+function answer(answer: ?string, question: Question): Question {
   if (!question) {
     throw new Error('Question object must be given.');
   }
