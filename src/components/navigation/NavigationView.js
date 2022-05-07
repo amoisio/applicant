@@ -22,7 +22,6 @@ export default function NavigationView({ templateRepository, questionnaireReposi
   const [questionnaires, setQuestionnaires] = useState([]);
 
   useEffect(() => {
-    console.log('load open questionnaires');
     const openQuestionnaires = questionnaireRepository.getActive();
     setQuestionnaires(openQuestionnaires);
   }, [questionnaireRepository]);
