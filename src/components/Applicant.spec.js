@@ -1,15 +1,42 @@
 import { screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
 import { render } from '../test-utilities/render';
 import Applicant from './Applicant';
-import Footer from './shared/Footer';
 
 describe('Applicant main page', () => {
+  const title = 'Applicant title';
+  let element;
+  beforeAll(() => {
+    element = (<Applicant title={title} />);
+  });
+
   it('should render application title', () => {
-    const title = 'Applicant title';
+    render(element);
+    
+    expect(screen.getByText(title)).toBeInTheDocument();
+  });
 
-    render(<Applicant title={title} />);
+  it('should show a menu link', () => {
+    render(element);
+    
+    expect(screen.getByText('Menu')).toBeInTheDocument();
+  });
 
-    screen.getByText(title);
+  it ('should show a template link', () => {
+    render(element);
+
+    expect(screen.getByText('Template')).toBeInTheDocument();
+  });
+
+  it('should show an archive link', () => {
+    render(element);
+
+    expect(screen.getByText('Archive')).toBeInTheDocument();
+  });
+
+  it('should show a textbox with a placeholder for entering a new questionnaire title', () => {
+    render(element);
+
+    expect(screen.getByRole('textbox')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/New questionnaire title/)).toBeInTheDocument();
   });
 });

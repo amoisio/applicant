@@ -2,38 +2,36 @@ import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Footer from './shared/Footer';
 import Header from './shared/Header';
-import TemplateRepository from '../services/template-repository';
-import QuestionnaireRepository from '../services/questionnaire-repository';
 import NavigationView from './navigation/NavigationView';
 import Archive from './archive/Archive';
 import TemplateView from './template-editor/TemplateView';
 import QuestionnaireView from './questionnaire/QuestionnaireView';
 import './Applicant.css';
 
-const renderNavigation = () => {
+const renderNavigation = (templateRepository, questionnaireRepository) => {
   return (
     <NavigationView
-      templateRepository={TemplateRepository}
-      questionnaireRepository={QuestionnaireRepository}
+      templateRepository={templateRepository}
+      questionnaireRepository={questionnaireRepository}
     />
   );
 };
 
-const renderQuestionnaire = () => {
-  return <QuestionnaireView repository={QuestionnaireRepository} />;
+const renderQuestionnaire = (questionnaireRepository) => {
+  return <QuestionnaireView repository={questionnaireRepository} />;
 };
 
-const renderTemplate = () => {
+const renderTemplate = (templateRepository) => {
   return (
-    <TemplateView title='Template questions' repository={TemplateRepository} />
+    <TemplateView title='Template questions' repository={templateRepository} />
   );
 };
 
-const renderArchive = () => {
+const renderArchive = (questionnaireRepository) => {
   return <Archive />;
 };
 
-export default function Applicant({ title }) {
+export default function Applicant({ title, templateRepository, questionnaireRepository }) {
   return (
     <div className='applicant'>
       <div className='applicant-header'>
@@ -42,13 +40,13 @@ export default function Applicant({ title }) {
       <div className='applicant-content'>
         <Routes>
           <Route path='/'>
-            <Route index element={renderNavigation()} />
+            <Route index element={renderNavigation(templateRepository, questionnaireRepository)} />
             <Route
               path='questionnaire/:questionnaireId'
-              element={renderQuestionnaire()}
+              element={renderQuestionnaire(questionnaireRepository)}
             />
-            <Route path='template' element={renderTemplate()} />
-            <Route path='archive' element={renderArchive()} />
+            <Route path='template' element={renderTemplate(templateRepository)} />
+            <Route path='archive' element={renderArchive(questionnaireRepository)} />
           </Route>
           <Route path='*' element={<Navigate to='/' replace={true} />} />
         </Routes>

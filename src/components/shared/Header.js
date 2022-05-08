@@ -13,7 +13,7 @@ export default function Header({ children }) {
       <ApplicationTitle>{children}</ApplicationTitle>
       <NavLink to='/'>
         <Icon icon='chevron-left' />
-        MENU
+        Menu
       </NavLink>
     </header>
   );

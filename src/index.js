@@ -2,13 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import Applicant from './components/Applicant';
+import TemplateRepository from '../services/template-repository';
+import QuestionnaireRepository from '../services/questionnaire-repository';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 ReactDOM.render(
   <BrowserRouter>
-    <Applicant title='Applicant' />
+    <Applicant 
+      title='Applicant'
+      templateRepository={TemplateRepository}
+      questionnaireRepository={QuestionnaireRepository} />
   </BrowserRouter>,
   document.getElementById('root')
 );
