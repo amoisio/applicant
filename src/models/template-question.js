@@ -1,15 +1,5 @@
-// @flow
-
 import { v4 as uuid } from 'uuid';
 import { trimmedOrDefault } from './common'
-
-/**
- * Template question types;
- */
-export type TemplateQuestion = {|
-  id: string,
-  text: ?string
-|};
 
 /**
  * Create a template question.
@@ -17,7 +7,7 @@ export type TemplateQuestion = {|
  * @param {string} id Question id. A UUID value will be auto generated if id is not provided.
  * @returns A template question.
  */
-function create(text: ?string, id: ?string): TemplateQuestion {
+function create(text, id) {
   const trimmedId = trimmedOrDefault(id);
   return {
     id: trimmedId ?? uuid(),
@@ -31,7 +21,7 @@ function create(text: ?string, id: ?string): TemplateQuestion {
  * @param {object} question Question to change.
  * @returns A template question with the changed text.
  */
-function changeText(text: ?string, question: ?TemplateQuestion): TemplateQuestion {
+function changeText(text, question){
   if (!question) {
     throw new Error('Question object must be given.');
   }

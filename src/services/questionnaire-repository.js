@@ -1,34 +1,30 @@
-// @flow
-
-import type { Questionnaire } from '../models/questionnaire';
-
 import ls from 'local-storage';
 
 const indexKey = 'applicant.questionnaire.index';
 const key = 'applicant.questionnaire';
 
-function getAll(): Questionnaire[] {
+function getAll() {
   return getIndex()
     .map(key => getById(key));
 }
 
-function getIndex(): string[] {
+function getIndex() {
   return ls(indexKey) ?? [];
 }
 
-function getById(id: string): Questionnaire {
+function getById(id) {
   return ls(`${key}.${id}`);
 }
 
-function getActive(): Questionnaire[] {
+function getActive() {
   return getAll().filter((q) => !q.isCompleted);
 }
 
-function getCompleted(): Questionnaire[] {
+function getCompleted() {
   return getAll().filter((q) => q.isCompleted);
 }
 
-function addOrUpdate(questionnaire: Questionnaire): Questionnaire {
+function addOrUpdate(questionnaire) {
   ls(`${key}.${questionnaire.id}`, questionnaire);
   const index = getIndex();
   if (!index.some((i) => i === questionnaire.id)) {
