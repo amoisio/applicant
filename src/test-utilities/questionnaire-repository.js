@@ -1,51 +1,46 @@
-// // @flow
 
-// import type { Questionnaire } from '../models/questionnaire';
+const store = new Map();
 
+function getAll() {
+  return getIndex()
+    .map(key => getById(key));
+}
 
-// const store = new Map();
+function getIndex() {
+  const indices = [];
+  for(const key of store.keys()) {
+    if (key !== undefined || key !== null) {
+      indices.push(key.toString());
+    }
+  }
+  return indices;
+}
 
-// function getAll(): Questionnaire[] {
-//   return getIndex()
-//     .map(key => getById(key));
-// }
+function getById(id) {
+  return store[id];
+}
 
-// function getIndex(): string[] {
+function getActive() {
+  return getAll()
+    .filter((q) => !q.isCompleted);
+}
 
-//   for(const key of store.keys()) {
+function getCompleted() {
+  return getAll()
+    .filter((q) => q.isCompleted);
+}
 
-//   }
-//   return store[Symbol.iterator]().map(s => s[0].toString());
-// }
+function addOrUpdate(questionnaire) {
+  store.set(questionnaire.id, questionnaire);
+  return questionnaire;
+}
 
-// function getById(id: string): Questionnaire {
-//   return ls(`${key}.${id}`);
-// }
+const api = {
+  getAll: getAll,
+  getById: getById,
+  getActive: getActive,
+  getCompleted: getCompleted,
+  addOrUpdate: addOrUpdate,
+};
 
-// function getActive(): Questionnaire[] {
-//   return getAll().filter((q) => !q.isCompleted);
-// }
-
-// function getCompleted(): Questionnaire[] {
-//   return getAll().filter((q) => q.isCompleted);
-// }
-
-// function addOrUpdate(questionnaire: Questionnaire): Questionnaire {
-//   ls(`${key}.${questionnaire.id}`, questionnaire);
-//   const index = getIndex();
-//   if (!index.some((i) => i === questionnaire.id)) {
-//     index.push(questionnaire.id);
-//     ls(indexKey, index);
-//   }
-//   return questionnaire;
-// }
-
-// const api = {
-//   getAll: getAll,
-//   getById: getById,
-//   getActive: getActive,
-//   getCompleted: getCompleted,
-//   addOrUpdate: addOrUpdate,
-// };
-
-// export default api;
+export default api;
