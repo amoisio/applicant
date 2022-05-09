@@ -1,24 +1,14 @@
-
-const store = [];
-
-function getTemplate() {
-  return store[0];
+export default function createRepository() {
+  const store = [];
+  const getTemplate = () => store[0];
+  const hasTemplate = () => !!getTemplate();
+  const addOrUpdateTemplate = (template) => {
+    store[0] = template;
+    return template;
+  }
+  return {
+    getTemplate,
+    hasTemplate,
+    addOrUpdateTemplate
+  };
 }
-
-function hasTemplate() {
-  const template = getTemplate();
-  return !!template;
-}
-
-function addOrUpdateTemplate(template) {
-  store[0] = template;
-  return template;
-}
-
-const api = {
-  getTemplate: getTemplate,
-  hasTemplate: hasTemplate,
-  addOrUpdateTemplate: addOrUpdateTemplate,
-};
-
-export default api;
