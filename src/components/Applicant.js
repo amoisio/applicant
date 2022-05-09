@@ -4,7 +4,7 @@ import Footer from './shared/Footer';
 import Header from './shared/Header';
 import NavigationView from './navigation/NavigationView';
 import Archive from './archive/Archive';
-import TemplateView from './template-editor/TemplateView';
+import TemplateView from './template/TemplateView';
 import QuestionnaireView from './questionnaire/QuestionnaireView';
 import './Applicant.css';
 
