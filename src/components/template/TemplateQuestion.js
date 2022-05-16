@@ -9,7 +9,7 @@ import AutoGrowTextarea from '../shared/AutoGrowTextarea';
  * @param {string} placeholder Textarea placholder. Default to 'Enter text...'.
  * @param {*} children Contents of the button. Can be any markup. Defaults to 'Go'.
  */
-export default function TemplateQuestion({ question, onChange, onClick, className, placeholder, children }) {
+export default function TemplateQuestion({ question, onChange, onClick, className, placeholder, children, ariaLabel }) {
   if (!onChange) throw new Error('onChange callback not defined.');
   if (!onClick) throw new Error('onClick callback not defined.');
   return (
@@ -19,7 +19,7 @@ export default function TemplateQuestion({ question, onChange, onClick, classNam
         onChange={onChange}
         value={question}
       />
-      <Button onClick={onClick} className='action-button'>
+      <Button onClick={onClick} className='action-button' ariaLabel={ariaLabel}>
         {children ?? 'Go'}
       </Button>
     </div>
