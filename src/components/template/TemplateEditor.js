@@ -77,6 +77,7 @@ export default function TemplateEditor({ template, onChange }) {
         onChange={setNewQuestion}
         onClick={addQuestion}
         className='new-template-question'
+        ariaLabel='add-question'
         placeholder='Enter new question...'>
         <Icon icon='plus-lg' />
       </TemplateQuestion>

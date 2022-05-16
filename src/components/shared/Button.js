@@ -3,10 +3,10 @@
  * @param {*} slot Content rendered inside the button element.
  * @param {function} onClick onClick(event) callback called when user clicks on the button.
  */
-export default function Button(props) {
+export default function Button({onClick, className, ariaLabel, children}) {
   return (
-    <button onClick={props.onClick} className={props.className} tabIndex="0">
-      {props.children}
+    <button onClick={onClick} className={className} tabIndex="0" aria-label={ariaLabel}>
+      {children}
     </button>
   )
 }
