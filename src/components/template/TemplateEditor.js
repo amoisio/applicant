@@ -58,12 +58,15 @@ export default function TemplateEditor({ template, onChange }) {
         onDragStart={(e) => onDragStart(e, question.id)}
         onDrop={(e) => onDrop(e, index)}
         onDragOver={onDragOver}
-        draggable='true'>
+        draggable='true'
+      >
         <TemplateQuestion
           question={question.text}
           onChange={(modifiedText) => updateQuestion(question.id, modifiedText)}
           onClick={() => removeQuestion(question.id)}
-          placeholder='Enter question...'>
+          ariaLabel='remove-question'
+          placeholder='Enter question...'
+        >
           <Icon icon='x-lg' />
         </TemplateQuestion>
       </div>
