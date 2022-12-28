@@ -1,38 +1,31 @@
-// @flow
-
 import { v4 as uuid } from 'uuid';
 import { trimmedOrDefault } from './common';
 import QuestionAPI from './question';
-import type { Question } from './question';
-import type { Template } from './template';
-
-/**
- * Questionnaire type.
- */
-export type Questionnaire = {|
-  id: string,
-  title: string,
-  questions: Question[],
-  started: Date,
-  finished: ?Date,
-  isCompleted: boolean
-|};
 
 /**
  * Create a questionnaire.
- * @param {object} template Template used to populate the questionnaire.
+ * @param {Template} template Template used to populate the questionnaire.
  * @param {string} title Questionnaire title.
  * @param {string} id Questionnaire id.
- * @returns An immutable questionnaire.
+ * @returns {Questionnaire} A new questionnaire.
  */
-function create(template: Template, title: string, id: string): Questionnaire {
+function create(template, title, id) {
   const questions = template.questions.map((q) =>
     QuestionAPI.create(q.text, q.id)
   );
   return createInternal(questions, title, new Date(), null, id);
 }
 
-function createInternal(questions: Question[], title: string, started: Date, finished: ?Date, id: ?string): Questionnaire {
+/**
+ * 
+ * @param {Question[]} questions 
+ * @param {string} title 
+ * @param {Date} started 
+ * @param {Date} finished 
+ * @param {string} id 
+ * @returns {Questionnaire}
+ */
+function createInternal(questions, title, started, finished, id) {
   const trimmedTitle = trimmedOrDefault(title);
   if (!trimmedTitle) {
     throw new Error('Title must be given.');
@@ -49,13 +42,13 @@ function createInternal(questions: Question[], title: string, started: Date, fin
 }
 
 /**
- * Answer a question.
+ * Answer a questionnaire question.
  * @param {string} id Id of the question to answer.
  * @param {string} text Answer text.
- * @param {object} questionnaire Questionnaire to answer.
- * @returns A copy of the questionnaire with the answered question.
+ * @param {Questionnaire} questionnaire Questionnaire to answer.
+ * @returns {Questionnaire} A new questionnaire with the answered question.
  */
-function answer(id: string, text: ?string, questionnaire: Questionnaire): Questionnaire {
+function answer(id, text, questionnaire) {
   if (questionnaire.isCompleted) {
     throw new Error(
       'Unable to answer question. Questionnaire has been completed.'
@@ -76,10 +69,10 @@ function answer(id: string, text: ?string, questionnaire: Questionnaire): Questi
 
 /**
  * Complete the questionnaire.
- * @param {object} questionnaire Questionnaire to complete
- * @returns A copy of the completed questionnaire.
+ * @param {Questionnaire} questionnaire Questionnaire to complete
+ * @returns {Questionnaire} A new completed questionnaire.
  */
-function complete(questionnaire: Questionnaire): Questionnaire {
+function complete(questionnaire) {
   return createInternal(
     questionnaire.questions,
     questionnaire.title,

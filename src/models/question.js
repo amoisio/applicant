@@ -1,26 +1,14 @@
-// @flow
-
 import { v4 as uuid } from 'uuid';
 import { trimmedOrDefault } from './common';
-
-/**
- * Question type.
- */
-export type Question = {|
-  id: string,
-  text: string,
-  answer: ?string,
-  isAnswered: boolean,
-|};
 
 /**
  * Create a question.
  * @param {string} text Question text.
  * @param {string} id Question id.
  * @param {string} answer Answer text.
- * @returns An immutable question.
+ * @returns {Question} A new question.
  */
-function create(text: ?string, id: string, answer: ?string): Question {
+function create(text, id, answer) {
   const trimmedText = trimmedOrDefault(text);
   if (!trimmedText) {
     throw new Error('Question text must be given.');
@@ -30,18 +18,18 @@ function create(text: ?string, id: string, answer: ?string): Question {
   return {
     id: trimmedId ?? uuid(),
     text: trimmedText,
-    answer: answer,
+    answer: trimmedAnswer,
     isAnswered: !!trimmedAnswer,
   };
 }
 
 /**
- * Returns a new immutable question structure with an updated question.
+ * Answer a question.
  * @param {string} answer Answer text.
- * @param {object} question Question structure.
- * @returns An immutable question with the answer text.
+ * @param {Question} question Question to answer.
+ * @returns {Question} A new question with the answer text.
  */
-function answer(answer: ?string, question: Question): Question {
+function answer(answer, question) {
   if (!question) {
     throw new Error('Question object must be given.');
   }

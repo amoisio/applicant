@@ -1,20 +1,31 @@
-// @flow
-
 import ls from 'local-storage';
-import type { Template } from '../models/template';
 
 const key = 'applicant.template'; 
 
-function getTemplate(): Template {
+/**
+ * Retrieves the questionnaire template.
+ * @returns {Template} Template stored in the repository.
+ */
+function getTemplate() {
   return ls(key);
 }
 
-function hasTemplate(): boolean {
+/**
+ * Checks if the repository has a template.
+ * @returns {Boolean} True or false depending on whether the repository contains
+ * a template.
+ */
+function hasTemplate() {
   const template = getTemplate();
   return !!template;
 }
 
-function addOrUpdateTemplate(template: Template): Template {
+/**
+ * Adds a template or updates the existing template stored in the repository.
+ * @param {Template} template Template to be stored in the repository.
+ * @returns {Template} A reference to the template that was saved in the repository.
+ */
+function addOrUpdateTemplate(template) {
   ls(key, template);
   return template;
 }

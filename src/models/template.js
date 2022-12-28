@@ -1,25 +1,14 @@
-// @flow
-
 import { v4 as uuid } from 'uuid';
 import { trimmedOrDefault } from './common';
 import TemplateQuestionAPI from './template-question';
-import type { TemplateQuestion } from './template-question';
-
-/**
- * Template type.
- */
-export type Template = {
-  id: string,
-  questions: TemplateQuestion[]
-};
 
 /**
  * Create a template.
- * @param {any[]|any} questions Template questions to include in the template.
+ * @param {(TemplateQuestion[] | TemplateQuestion)} questions Template questions to include in the template.
  * @param {string} id Template id. A UUID value will be auto generated if id is not provided.
- * @returns
+ * @returns {Template} A new template.
  */
-function create(questions: TemplateQuestion[], id: string): Template {
+function create(questions, id) {
   let arr = [];
   if (Array.isArray(questions)) {
     arr = questions.map(q => TemplateQuestionAPI.create(q.text, q.id));
@@ -38,10 +27,10 @@ function create(questions: TemplateQuestion[], id: string): Template {
 /**
  * Add a question to the template.
  * @param {string} text Question text.
- * @param {object} template Template to which the question is added.
- * @returns A copy of the template with the added question.
+ * @param {Template} template Template to which the question is added.
+ * @returns {Template} A new template with the added question.
  */
-function addQuestion(text: string, template: Template): Template {
+function addQuestion(text, template) {
   const trimmedText = trimmedOrDefault(text);
   if (!trimmedText) {
     throw new Error('Question text must be given.');
@@ -53,10 +42,10 @@ function addQuestion(text: string, template: Template): Template {
 /**
  * Remove a question from the template.
  * @param {string} id Id of the question to remove.
- * @param {object} template Template from which the question is removed.
- * @returns A copy of the template without the removed question.
+ * @param {Template} template Template from which the question is removed.
+ * @returns {Template} A new template without the removed question.
  */
-function removeQuestion(id: string, template: Template): Template {
+function removeQuestion(id, template) {
   const updatedQuestions = [...template.questions];
   const index = updatedQuestions.findIndex((q) => q.id === id);
   if (index === -1) {
@@ -70,10 +59,10 @@ function removeQuestion(id: string, template: Template): Template {
  * Move a question to different location within the template.
  * @param {string} id Id of the question to move.
  * @param {number} newIndex New index of the question. Value 0/-1 or any index >= size of the array places the question at the top/end of the list of questions, respectively.
- * @param {object} template Template in which the question is moved
- * @returns A copy of the template in which the question is in the new location.
+ * @param {Template} template Template in which the question is moved.
+ * @returns {Template} A new template in which the question is in the new location.
  */
-function reorderQuestion(id: string, newIndex: number, template: Template): Template {
+function reorderQuestion(id, newIndex, template) {
   if (newIndex === null || newIndex === undefined) {
     throw new Error('New index must be given.');
   }
@@ -101,10 +90,10 @@ function reorderQuestion(id: string, newIndex: number, template: Template): Temp
  * Change a question's text.
  * @param {string} id Id of the question with the updated text.
  * @param {string} text Updated question text.
- * @param {object} template Template in which the question text will be changed.
- * @returns A copy of the template in which the question text is changed.
+ * @param {Template} template Template in which the question text will be changed.
+ * @returns {Template} A new template in which the question text is changed.
  */
-function changeQuestionText(id: string, text: ?string, template: Template): Template {
+function changeQuestionText(id, text, template) {
   const updatedQuestions = [...template.questions];
   const index = updatedQuestions.findIndex(q => q.id === id);
   if (index === -1) {

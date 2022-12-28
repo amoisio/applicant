@@ -1,15 +1,12 @@
-// @flow
-
 /**
- * Trims the given string. Returns null if the string is null, undefined or empty.
+ * Removes the leading and trailing white space and line terminator characters of 
+ * the string. Additionally, returns null if the string is null or undefined.
  * @param {string} str String to trim.
+ * @returns {string} Trimmed string or null.
  */
-export function trimmedOrDefault(str: ?string): ?string {
+export function trimmedOrDefault(str) {
   if (str === null || str === undefined) {
     return null;
   }
-  const trimmedStr = str.trim();
-  return (trimmedStr.length === 0)
-    ? null
-    : trimmedStr;
+  return str.trim();
 }

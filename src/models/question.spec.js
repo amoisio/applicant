@@ -4,6 +4,7 @@ describe('Question', () => {
   it('should construct correctly with an empty answer', () => {
     const question = Question.create('is it really?', 'my-id');
 
+    console.log(question);
     expect(question.id).toBe('my-id');
     expect(question.text).toBe('is it really?');
     expect(question.answer).toBeNull();
